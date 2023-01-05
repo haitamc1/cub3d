@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 16:30:41 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/03 12:16:33 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:13:11 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,36 @@ void	exit_msg(char *msg)
 	exit (0);
 }
 
+
+int	map_line_count(int fd)
+{
+	char	**map;
+	char	*line;
+	int		count;
+
+	count = 1;
+	line = get_next_line(fd);
+	if (!line)
+		exit_msg("EMPTY MAP FILE\n");
+	free(line);
+	while (line)
+	{
+		line = get_next_line(fd);
+		free(line);
+		count++;
+	}
+	close(fd);
+	return (count);
+}
+
+
+char	**allocate_dp(int	size)
+{
+	char	**dp;
+	
+	dp = malloc ((size + 1) * sizeof(char *));
+	if (!dp)
+		exit_msg("ERROR ALLOCATING MEMORY\n");
+	dp[size] = NULL;
+	return (dp);
+}

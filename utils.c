@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 20:01:09 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/04 19:49:31 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/05 15:09:42 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	arg_len(char **s)
 	return (i);
 }
 
-int	is_space(char c)
+bool	is_space(char c)
 {
 	if (c == '\t' || c == '\n' || c == ' ' || c == '\v'
 		|| c == '\f' || c == '\r')
@@ -59,7 +59,7 @@ int	is_space(char c)
 	return (0);
 }
 
-int	just_space(char *s)
+bool	just_space(char *s)
 {
 	int	i;
 

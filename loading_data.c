@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/04 19:51:43 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:36:19 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_clr(char *clr)
 	data = ft_split(clr, ',');
 	if (!data)
 		exit_msg("ERROR ALLOCATING MEMORY\n");
-	if (arg_len(data) != 3)
+	if (arg_len(data) != 3 && data[3][0] != '\n')
 		exit_msg("INVALID COLOR\n");
 	while (data[i])
 	{
@@ -39,7 +39,7 @@ int	get_clr(char *clr)
 	return ((ft_atoi(data[0]) << 16) + (ft_atoi(data[1]) << 8) + (ft_atoi(data[2])));
 }
 
-char	*get_texture(char *s)
+char	*get_texture_file(char *s)
 {
 	char	*path;
 	int		begin;
@@ -48,10 +48,10 @@ char	*get_texture(char *s)
 	i = 0;
 	while (is_space(s[i]))
 		i++;
-	if (!s[i])
+	if (!s[i] && s[i] != '\n')
 		exit_msg("NO PATH WAS FOUND TO LOAD DATA FROM\n");
 	begin = i;
-	while (s[i] && s[i] != '\n')
+	while (s[i] && s[i] != '\n' && !is_space(s[i]))
 		i++;
 	i--;
 	path = ft_substr(s, begin, begin - i);
@@ -76,14 +76,14 @@ char	*get_texture(char *s)
 // 	}
 // }
 
-int	filled_texture_check(t_texture s)
+bool	filled_texture_check(t_texture s)
 {
 	if (s.ea && s.we && s.no && s.so && s.floor && s.ceiling)
 		return (1);
 	return (0);
 }
 
-int	valid_map_part(char c)
+bool	valid_map_part(char c)
 {
 	if (c == '1' || c == '0' || c == 'E' || c == 'S'
 		 || c == 'N' || c == 'W')
@@ -91,46 +91,54 @@ int	valid_map_part(char c)
 	return (0);
 }
 
-void	map(char *s)
+char	**get_map(char *file)
 {
-	int	i;
+	char		**map;
+	int			fd;
+	int			i;
 
 	i = 0;
-	while (s[i] && is_space(s[i]))
-		i++;
-}
-
-char	**get_map(int fd)
-{
-	char	**map;
-	char	**data;
-	char	*line;
-	t_texture	check;
-
-	line = get_next_line(fd);
-	if (!line)
-		exit_msg("EMPTY MAP FILE\n");
-	while (line)
+	fd = cub_fd(file);
+	map = allocate_dp(map_line_count(fd));
+	fd = cub_fd(file);
+	map[i] = get_next_line(fd);
+	while (map[i])
 	{
-		free(line);
-		if (!filled_space_check(check))
-		{
-			line = get_next_line(fd);
-			data = ft_split(line, ' ');
-			check_space(line[0], line[1], &check);
-			free(line);
-			free_dp(data);
-		}
-		else
-		{
-			if (just_space(line) || line[0] == 0)
-				line = get_next_line(fd);
-			else
-			{
-				
-			}
-			
-		}
+		i++;
+		map[i] = get_next_line(fd);
 	}
 	return (map);
+}
+
+void	get_textures(char *data, t_texture *check)
+{
+	char	**tmp;
+
+	tmp = ft_split(data, ' ');
+	if (!tmp)
+		exit_msg("ERROR ALLOCATING MEMORY\n");
+	check_space(tmp[0], tmp[1], check);
+}
+
+t_texture	check_map(char **map)
+{
+	t_texture	data;
+	int			i;
+
+	i = 0;
+	while (!filled_texture_check(data) && map[i])
+	{
+		if (just_space(map[i]) || map[i][0] == '\n')
+			i++;
+		else
+			get_textures(map[i++], &data);
+	}
+	if (!map[i])
+		exit_msg("INCOMPLETE MAP\n");
+	while (just_space(map[i]) || map[i][0] == '\n')
+			i++;
+	while (map[i])
+	{
+		
+	}
 }

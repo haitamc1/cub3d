@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/04 19:07:11 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:21:51 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,14 @@ void	str(char *s);
 int		is_space(char c);
 int		ft_isdigit(int c);
 void	free_dp(char **s);
+int		cub_fd(char *file_name);
+int		map_line_count(int fd);
+char	**allocate_dp(int	size);
+bool	just_space(char *s);
 
 /*****************************************/
 
-char	*get_texture(char *s);
+char	*get_texture_file(char *s);
 int		get_clr(char *clr);
 
 void	check_space(char *direction, char *description, t_texture *check);
