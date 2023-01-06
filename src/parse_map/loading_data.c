@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loading_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/06 17:32:21 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/06 19:04:44 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,12 +120,21 @@ void	get_texture(char *data, t_texture *check)
 	check_space(tmp[0], tmp[1], check);
 }
 
+int	skip_space(char *s, int	i)
+{
+	while (is_space(s[i]))
+		i++;
+	return (i);
+}
+
 t_texture	check_map(char **map)
 {
 	t_texture	data;
 	int			i;
+	int			j;
 
 	i = 0;
+	j = 0;
 	while (!filled_texture_check(data) && map[i])
 	{
 		if (just_space(map[i]) || map[i][0] == '\n')
@@ -137,7 +146,16 @@ t_texture	check_map(char **map)
 		exit_msg("INCOMPLETE MAP\n");
 	while (just_space(map[i]) || map[i][0] == '\n')
 			i++;
-	while (map[i])
+	j = skip_space(map[i][j], j);
+	while (map[i][j] && !is_space(map[i][j]) && map[i][j != '\n'])
+	{
+		if (map[i][j] != '1')
+			exit_msg("MAP ERROR\n");
+		j++;
+	}
+	if (map[i][j] && map[i][j] != '\n')
+		exit_msg("MAP ERROR\n");
+	while (map[++i])
 	{
 		
 	}

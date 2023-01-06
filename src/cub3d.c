@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:43:24 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/06 17:15:53 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/06 19:43:29 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	cub_fd(char *file_name)
 void	load_textures(bool *direction, char **file, char *description)
 {
 	*direction = true;
-	*file = get_texture(description);
+	*file = get_texture_file(description);
 }
 
 void	load_colors(bool *space, int *clr, char *description)
