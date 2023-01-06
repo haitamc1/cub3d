@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/06 17:32:12 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/06 19:54:44 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,17 @@
 # include "mlx.h"
 
 # define ESC 53
+
 # define UP 126
 # define DOWN 125
 # define RIGHT 124
 # define LEFT 123
+
+# define A 0
+# define S 0
+# define D 0
+# define W 13
+
 # define TILE_SIZE 32
 # define WIDTH 600
 # define HEIGHT 600
