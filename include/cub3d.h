@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/05 16:21:51 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/06 17:32:12 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "get_next_line.h"
+# include "../lib/get_next_line/get_next_line_bonus.h"
+# include "../lib/libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
@@ -75,12 +76,9 @@ typedef struct player
 ----------------- UTILS -----------------
 *****************************************/
 
-char	**ft_split(char const *str, char c);
 void	exit_msg(char *msg);
 int		arg_len(char **s);
-int		ft_atoi(const char *str);
 void	str(char *s);
-int		is_space(char c);
 int		ft_isdigit(int c);
 void	free_dp(char **s);
 int		cub_fd(char *file_name);
@@ -92,7 +90,7 @@ bool	just_space(char *s);
 
 char	*get_texture_file(char *s);
 int		get_clr(char *clr);
-
+void	get_texture(char *data, t_texture *check);
 void	check_space(char *direction, char *description, t_texture *check);
 
 int		key(int key, t_ply *p);

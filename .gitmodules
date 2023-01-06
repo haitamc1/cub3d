@@ -1,0 +1,6 @@
+[submodule "lib/get_next_line"]
+	path = lib/get_next_line
+	url = git@github.com:ab-rouzen/arouzen_GNL.git
+[submodule "lib/libft"]
+	path = lib/libft
+	url = git@github.com:ab-rouzen/libft_1337.git

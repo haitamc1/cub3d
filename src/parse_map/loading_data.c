@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   loading_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/05 16:36:19 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/06 17:32:21 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../include/cub3d.h"
 
 int	get_clr(char *clr)
 {
@@ -110,7 +110,7 @@ char	**get_map(char *file)
 	return (map);
 }
 
-void	get_textures(char *data, t_texture *check)
+void	get_texture(char *data, t_texture *check)
 {
 	char	**tmp;
 
@@ -131,7 +131,7 @@ t_texture	check_map(char **map)
 		if (just_space(map[i]) || map[i][0] == '\n')
 			i++;
 		else
-			get_textures(map[i++], &data);
+			get_texture(map[i++], &data);
 	}
 	if (!map[i])
 		exit_msg("INCOMPLETE MAP\n");

@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   math_formulas.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 20:36:24 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/04 16:22:46 by hchahid          ###   ########.fr       */
+/*   Created: 2022/12/31 13:33:06 by hchahid           #+#    #+#             */
+/*   Updated: 2023/01/06 17:13:07 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../include/cub3d.h"
 
-int	ft_isdigit(int c)
+double	pythagore(double adjacent, double opposite)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	return (sqrt(pow(opposite, 2) + pow(adjacent, 2)));
 }

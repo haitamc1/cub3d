@@ -1,0 +1,6 @@
+build
+lib
+cub3d
+a.out
+*.o
+*/*.o

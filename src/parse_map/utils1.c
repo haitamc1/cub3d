@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 16:30:41 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/05 16:13:11 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/06 17:27:00 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../include/cub3d.h"
 
 void	str(char *s)
 {

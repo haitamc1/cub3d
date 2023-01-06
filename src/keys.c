@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_formulas.c                                    :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 13:33:06 by hchahid           #+#    #+#             */
-/*   Updated: 2022/12/31 13:35:21 by hchahid          ###   ########.fr       */
+/*   Created: 2022/12/29 18:48:26 by hchahid           #+#    #+#             */
+/*   Updated: 2023/01/06 17:16:01 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
-double	pythagore(double adjacent, double opposite)
+int key(int key, t_ply *p)
 {
-	return (sqrt(pow(opposite, 2) + pow(adjacent, 2)));
+	if (key == ESC)
+	{
+		mlx_destroy_window(p->mlx, p->win);
+		exit (0);
+	}
+}
+
+int	cross(t_ply *p)
+{
+	mlx_destroy_window(p->mlx, p->win);
+	exit(0);
 }
