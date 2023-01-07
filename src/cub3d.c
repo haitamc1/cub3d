@@ -6,17 +6,48 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:43:24 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/06 19:43:29 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/07 22:15:12 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+int	MAP_ROWS = 15;
+int	MAP_COLS = 15;
+
+int		grid[15][15] = {
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+            {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+				};
+
+void	my_mlx_pixel_put(t_ply *p, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = p->addr + (y * p->line_length + x * (p->bits_per_pixel / 8));
+	*(unsigned int *) dst = color;
+}
+
 void	init(t_ply *p)
 {
+	p->tile_size = TILE_SIZE;
+	p->player_size = 10;
 	p->mlx = mlx_init();
-	p->win = mlx_new_window(p->mlx, WIDTH, HEIGHT, "CUB3D");
-	p->img = mlx_new_image(p->mlx, WIDTH, HEIGHT);
+	p->win = mlx_new_window(p->mlx, MAP_ROWS * TILE_SIZE, MAP_COLS * TILE_SIZE, "CUB3D");
+	p->img = mlx_new_image(p->mlx, MAP_ROWS * TILE_SIZE, MAP_COLS * TILE_SIZE);
 	p->addr = mlx_get_data_addr(p->img, &p->bits_per_pixel,
 			&p->line_length, &p->endian);
 }
@@ -71,6 +102,89 @@ void	check_file_extention(char *file)
 		return (exit_msg("INVALID FILE EXTENTION\n"));
 }
 
+void	rectangle(t_ply *p, int i, int j, int color)
+{
+	int	j_holder;
+	int	i_holder;
+
+	j_holder = j;
+	i_holder = i;
+	while (i < i_holder + p->tile_size)
+	{
+		j = j_holder;
+		while (j < j_holder + p->tile_size)
+		{
+			my_mlx_pixel_put(p, i, j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_player(t_ply *p, int i, int j)
+{
+	int	j_holder;
+	int	i_holder;
+	int	color;
+
+
+	color = 0xf5fffa;
+	// i = 1;
+	// j = 1;
+	// while (grid[i][j])
+	// {
+	// 	if (j >= MAP_ROWS)
+	// 	{
+	// 		i++;
+	// 		j = 1;
+	// 	}
+	// 	j++;
+	// }
+	i = 55;
+	j = 55;
+	j_holder = j;
+	i_holder = i;
+	while (i < i_holder + p->player_size)
+	{
+		j = j_holder;
+		while (j < j_holder + p->player_size)
+		{
+			my_mlx_pixel_put(p, i, j, 0x0000ff00);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_map(t_ply *p)
+{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+
+	i = 0;
+	j = 0;
+	x = 0;
+	y = 0;
+	while (i < (MAP_ROWS * p->tile_size) && x < 15)
+	{
+		j = 0;
+		y = 0;
+		while (j < (MAP_COLS * p->tile_size) && y < 15)
+		{
+			if (grid[y][x] == 1)
+				rectangle(p, i, j, WALL_CLR);
+			j += p->tile_size;
+			y++;
+		}
+		i += p->tile_size;
+		x++;
+	}
+	draw_player(p, 0, 0);
+	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
+}
+
 int	main(int ac, char **av)
 {
 	t_ply	p;
@@ -79,6 +193,7 @@ int	main(int ac, char **av)
 	{
 		check_file_extention(av[1]);
 		init(&p);
+		draw_map(&p);
 		mlx_hook(p.win, 17, 0, &cross, &p);
 		mlx_hook(p.win, 2, 1L << 0, &key, &p);
 		mlx_loop(p.mlx);

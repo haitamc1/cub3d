@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/06 19:54:44 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/07 21:32:05 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@
 # define D 0
 # define W 13
 
-# define TILE_SIZE 32
+# define WALL_CLR 0x00f00ff0
+
+# define TILE_SIZE 40
 # define WIDTH 600
 # define HEIGHT 600
 # define PI 3.14159265359
@@ -68,6 +70,11 @@ typedef struct player
 {
 	double	x;
 	double	y;
+	int		tile_size;
+	int		player_size;
+	double	turn_direction;
+	double	walk_direction;
+	double	rotation_angle;
 	void	*img;
 	void	*mlx;
 	void	*win;
@@ -90,7 +97,7 @@ int		ft_isdigit(int c);
 void	free_dp(char **s);
 int		cub_fd(char *file_name);
 int		map_line_count(int fd);
-char	**allocate_dp(int	size);
+char	**allocate_dp(int size);
 bool	just_space(char *s);
 
 /*****************************************/
