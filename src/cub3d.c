@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:43:24 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/07 18:20:44 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/07 22:03:15 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ void	load_textures(bool *direction, char **file, char *description)
 // 	*clr = get_clr(description);
 // }
 
-void	check_space(char *direction, char *path, t_texture *check)
+void	check_resource(char *direction, char *path, t_texture *check)
 {
-	if (!ft_strcmp(direction, "EA") && check->ea_file)
-		check->ea_file = path;
-	else if (!ft_strcmp(direction, "WE") && check->we_file)
-		check->we_file = path;
-	else if (!ft_strcmp(direction, "NO") && check->no_file)
-		check->no_file = path;
-	else if (!ft_strcmp(direction, "SO") && check->so_file)
-		check->so_file = path;
+	if (!ft_strcmp(direction, "EA") && !check->ea_file)
+		check->ea_file = ft_strtrim(path, "\n");
+	else if (!ft_strcmp(direction, "WE") && !check->we_file)
+		check->we_file = ft_strtrim(path, "\n");
+	else if (!ft_strcmp(direction, "NO") && !check->no_file)
+		check->no_file = ft_strtrim(path, "\n");
+	else if (!ft_strcmp(direction, "SO") && !check->so_file)
+		check->so_file = ft_strtrim(path, "\n");
 	else if (!ft_strcmp(direction, "F") && check->floor_clr == -1)
 		check->floor_clr = get_clr(path);
 	else if (!ft_strcmp(direction, "C") && check->ceiling_clr == -1)

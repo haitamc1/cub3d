@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/07 18:14:56 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/07 22:03:38 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	get_clr(char *clr)
 	{
 		// if (data[i][j] && data[i][j] != '\n')
 		// 	exit_msg("INVALID COLOR\n");
-		if (ft_isnum(data[i]) == FALSE)
-			exit_msg("INVALID COLOR NUMBER\n");
+		// if (ft_isnum(data[i]) == FALSE)
+		// 	exit_msg("INVALID COLOR NUMBER\n");
 		rgb[i] = ft_atoi(data[i]);
 		if (rgb[i] > 255 || rgb[i] < 0)
 			exit_msg("COLOR OUT OF RGB RANGE\n");
@@ -39,7 +39,7 @@ int	get_clr(char *clr)
 	return (get_rgb_color(rgb));
 }
 
-get_rgb_color(int *rgb)
+int	get_rgb_color(int *rgb)
 {
 	return ((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]);
 }
@@ -124,7 +124,7 @@ void	get_texture(char *data, t_texture *check)
 	tmp = ft_split(data, ' '); //what if tabs?
 	if (ft_chardp_len(tmp) != 2)
 		exit_msg("ERROR GETTING TEXTURE\n");
-	check_space(tmp[0], tmp[1], check);
+	check_resource(tmp[0], tmp[1], check);
 }
 
 int	skip_space(char *s, int	i)
@@ -144,6 +144,8 @@ t_texture	check_map(char **map)
 	j = 0;
 
 	map = parse_resources(map);
+	printf("|%s|", *map);
+	printf("|%s|", *(map + 1));
 	// if (!map[i])
 	// 	exit_msg("INCOMPLETE MAP\n");
 	// while (just_space(map[i]) || map[i][0] == '\n')
@@ -155,7 +157,7 @@ t_texture	check_map(char **map)
 	// 		exit_msg("MAP ERROR\n");
 	// 	j++;
 	// }
-	// if (map[i][j] && map[i][j] != '\n')
+	// if (map[i][j] &&       map[i][j] != '\n')
 	// 	exit_msg("MAP ERROR\n");
 	// while (map[++i])
 	// {

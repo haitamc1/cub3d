@@ -6,15 +6,13 @@ M_INCL_DIR = include/
 
 M_INCLUDE_NAME = cub3d
 
-M_INCL_M = $(addprefix $(M_INCL_DIR), $(M_INCL_NAME))
-
 M_SRC_PRIME_DIR = src/
 
 M_SRC_PARSE_DIR = src/parse_map/
 
 M_SRC_DRAW_DIR = src/draw/
 
-FALGS = -Wall -Wextra -fsanitize=address #-Werror #
+FALGS = -Wall -Wextra -fsanitize=address -g#-Werror #
 
 M_SRC_PARSE_NAME =   utils utils1 loading_data parse_resource #ft_split ft_atoi  ft_isdigit
 
@@ -35,7 +33,7 @@ LIB_GNL = lib/get_next_line/
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 
 # Header files
-M_INCUDE = $(addsuffix .h, $(M_INCLUDE_NAME))
+M_INCLUDE = $(addsuffix .h, $(M_INCLUDE_NAME))
 M_INCLUDE_PATH = $(addprefix $(M_INCL_DIR), $(M_INCLUDE))
 
 # Source files
@@ -53,12 +51,12 @@ M_OBJ = $(M_SRC:%=$(BUILD_DIR)%.o)
 all : $(NAME)
 	@echo everything is in order...
 
-$(NAME) : $(M_OBJ) $(M_INCL_M) 
+$(NAME) : $(M_OBJ) $(M_INCLUDE_PATH)
 	make bonus -C $(LIB_FT)
 	make bonus -C $(LIB_GNL)
 	$(CC) $(MLX_FLAGS) $(FALGS) $(LFLAGS)  $(M_OBJ) $(LIBS) -o $(NAME)
 
-$(BUILD_DIR)%.c.o : %.c $(M_INCL_M)
+$(BUILD_DIR)%.c.o : %.c $(M_INCLUDE_PATH)
 	@mkdir -p $(dir $@)
 	$(CC) $(FALGS) $(IFLAGS) -c $< -o $@
 

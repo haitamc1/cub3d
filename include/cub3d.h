@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/07 18:23:20 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/07 22:56:30 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct player
 	char	space_type;
 
 }	t_ply;
+extern t_texture data;
 
 /****************************************
 ----------------- UTILS -----------------
@@ -90,17 +91,22 @@ int		get_rgb_color(int *rgb);
 
 /*****************************************/
 
-char	*get_texture_file(char *s);
-int		get_clr(char *clr);
-void	get_texture(char *data, t_texture *check);
-void	check_space(char *direction, char *description, t_texture *check);
-int		key(int key, t_ply *p);
-int		cross(t_ply *p);
-int		mouse_hook(int key, int i, int j, t_ply *p);
-int		ft_strcmp(const char *s1, const char *s2);
-void	init(t_ply *p);
-void	check_file_extension(char *file, char *extension);
-char 	**parse_resources(char **map);
-void	init_textures(t_texture *data);
+char		*get_texture_file(char *s);
+int			get_clr(char *clr);
+void		get_texture(char *data, t_texture *check);
+void		check_resource(char *direction, char *description, t_texture *check);
+int			key(int key, t_ply *p);
+int			cross(t_ply *p);
+int			mouse_hook(int key, int i, int j, t_ply *p);
+void		init(t_ply *p);
+void		check_file_extension(char *file, char *extension);
+char 		**parse_resources(char **map);
+void		init_textures(t_texture *data);
+t_texture	check_map(char **map);
+char		**get_map(char *file);
+bool		is_space(char c);
+void		check_space(char *map, int pos);
+int			parse_map(char **map);
+void		parse_line(char *line);
 
 #endif
