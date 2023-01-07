@@ -1,45 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   parse_resource.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/30 20:01:09 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/07 12:19:08 by arouzen          ###   ########.fr       */
+/*   Created: 2023/01/07 16:07:31 by arouzen           #+#    #+#             */
+/*   Updated: 2023/01/07 17:42:51 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-bool	is_space(char c)
+char **parse_resources(char **map)
 {
-	if (c == '\t' || c == '\n' || c == ' ' || c == '\v'
-		|| c == '\f' || c == '\r')
-		return (1);
-	return (0);
-}
-
-bool	just_space(char *s)
-{
-	int	i;
+	int			i;
+	t_texture	data;
 
 	i = 0;
-	while (s[i] && is_space(s[i]))
-		i++;
-	if (s[i] && s[i] != '\n')
-		return (0);
-	return (1);
-}
-
-void	free_dp(char **s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
-		free(s[i++]);
-	free(s);
+	while (!filled_texture_check(data) && map[i])
+	{
+		if (just_space(map[i]) || map[i][0] == '\n')
+			i++;
+		else
+			get_texture(map[i++], &data);
+	}
+	return (map[i]);
 }

@@ -14,20 +14,19 @@ M_SRC_PARSE_DIR = src/parse_map/
 
 M_SRC_DRAW_DIR = src/draw/
 
-FALGS = -Wall -Wextra #-Werror #-fsanitize=address
+FALGS = -Wall -Wextra -fsanitize=address #-Werror #
 
-M_SRC_PARSE_NAME =   utils utils1 loading_data #ft_split ft_atoi  ft_isdigit
+M_SRC_PARSE_NAME =   utils utils1 loading_data parse_resource #ft_split ft_atoi  ft_isdigit
 
 M_SRC_DRAW_NAME = 
 
-M_SRC_PRIME_NAME = cub3d keys
+M_SRC_PRIME_NAME = main cub3d keys init
 
 BUILD_DIR = build/
 
 M_SRC_DIR  = src/
 
 LIBS = $(LIB_FT)libft.a $(LIB_GNL)libgnl.a
-
 
 LIB_FT = lib/libft/
 

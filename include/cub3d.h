@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/06 19:54:44 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/07 18:23:20 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <fcntl.h>
 # include <math.h>
 # include "mlx.h"
-
 # define ESC 53
 
 # define UP 126
@@ -42,17 +41,11 @@
 
 typedef struct texture
 {
-	bool	no;
 	char	*no_file;
-	bool	so;
 	char	*so_file;
-	bool	ea;
 	char	*ea_file;
-	bool	we;
 	char	*we_file;
-	bool	floor;
 	int		floor_clr;
-	bool	ceiling;
 	int		ceiling_clr;
 }	t_texture;
 
@@ -90,8 +83,10 @@ int		ft_isdigit(int c);
 void	free_dp(char **s);
 int		cub_fd(char *file_name);
 int		map_line_count(int fd);
-char	**allocate_dp(int	size);
+char	**allocate_dp(int size);
 bool	just_space(char *s);
+void	load_colors(bool *space, int *clr, char *description);
+int		get_rgb_color(int *rgb);
 
 /*****************************************/
 
@@ -99,10 +94,13 @@ char	*get_texture_file(char *s);
 int		get_clr(char *clr);
 void	get_texture(char *data, t_texture *check);
 void	check_space(char *direction, char *description, t_texture *check);
-
 int		key(int key, t_ply *p);
 int		cross(t_ply *p);
 int		mouse_hook(int key, int i, int j, t_ply *p);
 int		ft_strcmp(const char *s1, const char *s2);
+void	init(t_ply *p);
+void	check_file_extension(char *file, char *extension);
+char 	**parse_resources(char **map);
+void	init_textures(t_texture *data);
 
 #endif

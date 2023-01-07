@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:43:24 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/06 19:43:29 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/07 18:20:44 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	cub_fd(char *file_name)
 {
 	int	fd;
 
-	fd = open (file_name, O_RDWR, 0644);
+	fd = open (file_name, O_RDONLY);
 	if (fd < 0)
 		exit_msg("COULD NOT OPEN FILE\n");
 	return (fd);
@@ -33,56 +33,41 @@ int	cub_fd(char *file_name)
 
 void	load_textures(bool *direction, char **file, char *description)
 {
-	*direction = true;
-	*file = get_texture_file(description);
+	*file = description;
+	//*file = get_texture_file(description);
 }
 
-void	load_colors(bool *space, int *clr, char *description)
+// void	load_colors(bool *space, int *clr, char *description)
+// {
+// 	*space = true;
+// 	*clr = get_clr(description);
+// }
+
+void	check_space(char *direction, char *path, t_texture *check)
 {
-	*space = true;
-	*clr = get_clr(description);
-}
-
-void	check_space(char *direction, char *description, t_texture *check)
-{
-	if (!ft_strcmp(direction, "EA") && !check->ea)
-		return (load_textures(&check->ea, &check->ea_file, description));
-	if (!ft_strcmp(direction, "WE") && !check->we)
-		return (load_textures(&check->we, &check->we_file, description));
-	if (!ft_strcmp(direction, "NO") && !check->no)
-		return (load_textures(&check->no, &check->no_file, description));
-	if (!ft_strcmp(direction, "SO") && !check->so)
-		return (load_textures(&check->so, &check->so_file, description));
-	if (!ft_strcmp(direction, "F") && !check->floor)
-		return (load_colors(&check->floor, &check->floor_clr, description));
-	if (!ft_strcmp(direction, "C") && !check->ceiling)
-		return (load_colors(&check->ceiling, &check->ceiling_clr, description));
-	exit_msg("MAP ERROR\n");
-}
-
-void	check_file_extention(char *file)
-{
-	int	len;
-
-	len = ft_strlen(file);
-	if (len < 5)
-		return (exit_msg("INVALID FILE\n"));
-	if (ft_strcmp((file + len - 4), ".cub"))
-		return (exit_msg("INVALID FILE EXTENTION\n"));
-}
-
-int	main(int ac, char **av)
-{
-	t_ply	p;
-
-	if (ac == 2)
-	{
-		check_file_extention(av[1]);
-		init(&p);
-		mlx_hook(p.win, 17, 0, &cross, &p);
-		mlx_hook(p.win, 2, 1L << 0, &key, &p);
-		mlx_loop(p.mlx);
-	}
+	if (!ft_strcmp(direction, "EA") && check->ea_file)
+		check->ea_file = path;
+	else if (!ft_strcmp(direction, "WE") && check->we_file)
+		check->we_file = path;
+	else if (!ft_strcmp(direction, "NO") && check->no_file)
+		check->no_file = path;
+	else if (!ft_strcmp(direction, "SO") && check->so_file)
+		check->so_file = path;
+	else if (!ft_strcmp(direction, "F") && check->floor_clr == -1)
+		check->floor_clr = get_clr(path);
+	else if (!ft_strcmp(direction, "C") && check->ceiling_clr == -1)
+		check->ceiling_clr = get_clr(path);
 	else
-		str("INVALID NUMBER OF ARGUMENTS\n");
+		exit_msg("MAP ERROR\n");
+}
+
+void	check_file_extension(char *file, char *extension)
+{
+	char	*str;
+	// len = ft_strlen(file);
+	// if (len < 5)
+	// 	return (exit_msg("INVALID FILE\n"));
+	str = ft_strnstr(file, extension, ft_strlen(file));
+	if (str == NULL || ft_strlen(str) != ft_strlen(extension))
+		exit_msg("INVALID FILE EXTENTION\n");
 }

@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 16:30:41 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/06 17:27:00 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/07 13:56:35 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	str(char *s)
 	while (s[i])
 		write (1, &s[i++], 1);
 }
-
 void	exit_msg(char *msg)
 {
 	str(msg);
@@ -59,6 +58,5 @@ char	**allocate_dp(int	size)
 	dp = malloc ((size + 1) * sizeof(char *));
 	if (!dp)
 		exit_msg("ERROR ALLOCATING MEMORY\n");
-	dp[size] = NULL;
 	return (dp);
 }
