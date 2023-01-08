@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:43:24 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/07 22:03:15 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/08 12:57:17 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	cub_fd(char *file_name)
 	return (fd);
 }
 
-void	load_textures(bool *direction, char **file, char *description)
-{
-	*file = description;
-	//*file = get_texture_file(description);
-}
+// void	load_textures(bool *direction, char **file, char *description)
+// {
+// 	*file = description;
+// 	//*file = get_texture_file(description);
+// }
 
 // void	load_colors(bool *space, int *clr, char *description)
 // {

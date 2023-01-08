@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 16:30:41 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/07 13:56:35 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/08 13:00:45 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	exit_msg(char *msg)
 
 int	map_line_count(int fd)
 {
-	char	**map;
 	char	*line;
 	int		count;
 

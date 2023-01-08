@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/07 22:56:30 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/08 16:11:18 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,16 @@ void		init(t_ply *p);
 void		check_file_extension(char *file, char *extension);
 char 		**parse_resources(char **map);
 void		init_textures(t_texture *data);
-t_texture	check_map(char **map);
+void		check_map(char **map);
 char		**get_map(char *file);
 bool		is_space(char c);
-void		check_space(char *map, int pos);
+void		check_space(char **map, int x, int y);
+void		check_zero(char **map, int x, int y);
 int			parse_map(char **map);
-void		parse_line(char *line);
+void		parse_line(char **map, int x);
+t_bool		is_valid_token(char c);
+t_bool		is_player_pos(char c);
+bool		filled_texture_check(t_texture s);
+void		check_player(char **map, int x, int y);
 
 #endif

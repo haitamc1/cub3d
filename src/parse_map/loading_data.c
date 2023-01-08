@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/07 22:03:38 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/08 16:22:07 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	get_clr(char *clr)
 {
 	char	**data;
-	long	holder;
 	int		rgb[3];
 	int		i;
 
@@ -100,6 +99,7 @@ bool	valid_map_part(char c)
 char	**get_map(char *file)
 {
 	char		**map;
+	char		*tmp;
 	int			fd;
 	int			i;
 
@@ -107,11 +107,15 @@ char	**get_map(char *file)
 	fd = cub_fd(file);
 	map = allocate_dp(map_line_count(fd));
 	fd = cub_fd(file);
-	map[i] = get_next_line(fd);
+	tmp = get_next_line(fd);
+	map[i] = ft_strtrim(tmp, "\n");
+	free (tmp);
 	while (map[i])
 	{
 		i++;
-		map[i] = get_next_line(fd);
+		tmp = get_next_line(fd);
+		map[i] = ft_strtrim(tmp, "\n");
+		free(tmp);
 	}
 	map[++i] = NULL;
 	return (map);
@@ -134,18 +138,17 @@ int	skip_space(char *s, int	i)
 	return (i);
 }
 
-t_texture	check_map(char **map)
+void	check_map(char **map)
 {
-	t_texture	data;
-	int			i;
-	int			j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-
 	map = parse_resources(map);
-	printf("|%s|", *map);
-	printf("|%s|", *(map + 1));
+	// printf("|%s|", *map);
+	// printf("|%s|", *(map + 1));
+	parse_map(map);
 	// if (!map[i])
 	// 	exit_msg("INCOMPLETE MAP\n");
 	// while (just_space(map[i]) || map[i][0] == '\n')

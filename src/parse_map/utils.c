@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 20:01:09 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/07 21:08:23 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/08 16:00:06 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,19 @@ void	free_dp(char **s)
 	while (s[i])
 		free(s[i++]);
 	free(s);
+}
+
+t_bool	is_valid_token(char c)
+{
+	if (c == '0' || c== '1' || c == ' ' || \
+		c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (TRUE);
+	return (FALSE);
+}
+
+t_bool	is_player_pos(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (TRUE);
+	return (FALSE);
 }
