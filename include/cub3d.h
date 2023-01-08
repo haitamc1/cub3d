@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/07 21:32:05 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/08 16:19:58 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,21 @@
 
 # define ESC 53
 
-# define UP 126
-# define DOWN 125
-# define RIGHT 124
+//*********FOR_CHANGING_THE_FIELD_OF_VIEW**********//
+
+# define RIGHT 124 
 # define LEFT 123
 
+//*************************************************//
+
+//*********FOR_MOVEMENT**********//
+
 # define A 0
-# define S 0
-# define D 0
+# define S 1
+# define D 2
 # define W 13
+
+//******************************//
 
 # define WALL_CLR 0x00f00ff0
 
@@ -75,6 +81,7 @@ typedef struct player
 	double	turn_direction;
 	double	walk_direction;
 	double	rotation_angle;
+	double	rotation_speed;
 	void	*img;
 	void	*mlx;
 	void	*win;

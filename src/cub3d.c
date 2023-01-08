@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:43:24 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/07 22:15:12 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/08 18:38:48 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		grid[15][15] = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
             {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-            {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+            {1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 1},
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
             {1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -44,6 +44,7 @@ void	my_mlx_pixel_put(t_ply *p, int x, int y, int color)
 void	init(t_ply *p)
 {
 	p->tile_size = TILE_SIZE;
+	p->rotation_speed = 3 * (PI / 180); 
 	p->player_size = 10;
 	p->mlx = mlx_init();
 	p->win = mlx_new_window(p->mlx, MAP_ROWS * TILE_SIZE, MAP_COLS * TILE_SIZE, "CUB3D");
@@ -121,39 +122,83 @@ void	rectangle(t_ply *p, int i, int j, int color)
 	}
 }
 
-void	draw_player(t_ply *p, int i, int j)
+// y = ax + b;
+
+void	line_of_direction(t_ply *p)
 {
+	double	y;
+	double	x;
+	// double	a;
+	// double	b;
+	int		i;
+	
+	// b = p->y;
+	// a = -b / p->x;
+	p->x += 5;
+	p->y += 5;
+	x = p->x;
+	y = p->y;
+	i = 0;
+	while (i < 30)
+	{
+		my_mlx_pixel_put(p, y, x, 0x0000ff00);
+		y++;
+		i++;
+	}
+}
+
+void	draw_player(t_ply *p)
+{
+	int	i;
+	int	j;
 	int	j_holder;
 	int	i_holder;
 	int	color;
 
 
 	color = 0xf5fffa;
-	// i = 1;
-	// j = 1;
-	// while (grid[i][j])
-	// {
-	// 	if (j >= MAP_ROWS)
-	// 	{
-	// 		i++;
-	// 		j = 1;
-	// 	}
-	// 	j++;
-	// }
-	i = 55;
-	j = 55;
-	j_holder = j;
-	i_holder = i;
+	i = 0;
+	j = 0;
+	while (i < MAP_COLS)
+	{
+		j = 0;
+		while (j < MAP_ROWS)
+		{
+			if (grid[i][j] == 2)
+			{
+				i_holder = i * TILE_SIZE + 15;
+				j_holder = j * TILE_SIZE + 15;
+				break ;
+			}
+			j++;
+		}
+		if (grid[i][j] == 2)
+			break ;
+		i++;
+	}
+	j = j_holder;
+	i = i_holder;
 	while (i < i_holder + p->player_size)
 	{
 		j = j_holder;
 		while (j < j_holder + p->player_size)
 		{
-			my_mlx_pixel_put(p, i, j, 0x0000ff00);
+			my_mlx_pixel_put(p, j, i, 0x0000ff00);
 			j++;
 		}
 		i++;
 	}
+	p->x = i_holder;
+	p->y = j_holder;
+	p->rotation_angle = 0;
+	line_of_direction(p);
+}
+
+
+int	new_player_position(t_ply *p, double step_lenght)
+{
+	p->x = step_lenght * cos(p->rotation_angle);
+	p->y = step_lenght * sin(p->rotation_angle);
 }
 
 void	draw_map(t_ply *p)
@@ -181,7 +226,7 @@ void	draw_map(t_ply *p)
 		i += p->tile_size;
 		x++;
 	}
-	draw_player(p, 0, 0);
+	draw_player(p);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 }
 
