@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 16:30:41 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/06 17:27:00 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/10 10:37:00 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	str(char *s)
 	while (s[i])
 		write (1, &s[i++], 1);
 }
-
 void	exit_msg(char *msg)
 {
 	str(msg);
@@ -32,7 +31,6 @@ void	exit_msg(char *msg)
 
 int	map_line_count(int fd)
 {
-	char	**map;
 	char	*line;
 	int		count;
 
@@ -59,6 +57,11 @@ char	**allocate_dp(int	size)
 	dp = malloc ((size + 1) * sizeof(char *));
 	if (!dp)
 		exit_msg("ERROR ALLOCATING MEMORY\n");
-	dp[size] = NULL;
 	return (dp);
+}
+
+
+double	deg_to_rad(double n)
+{
+	return (n * (PI / 180));
 }

@@ -1,0 +1,16 @@
+cases:
+
+111111
+100101
+101001
+1100N1
+111111
+
+-- zero:
+ a
+b0c
+ d
+a = not empty 
+b = shouldn't be pos -1
+c = shouldnt be \n
+d = shouldnt be empty
