@@ -18,7 +18,7 @@ M_SRC_PARSE_NAME =   utils utils1 loading_data parse_resource #ft_split ft_atoi 
 
 M_SRC_DRAW_NAME = 
 
-M_SRC_PRIME_NAME = cub3d keys init # main
+M_SRC_PRIME_NAME = cub3d keys init  main draw
 
 BUILD_DIR = build/
 

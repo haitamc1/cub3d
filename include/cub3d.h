@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/10 10:37:40 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/13 18:24:47 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@
 # define MAP_COLS 15
 
 # define TILE_SIZE 40
-# define WIDTH 600
-# define HEIGHT 600
+# define WIDTH (MAP_COLS * TILE_SIZE)
+# define HEIGHT (MAP_ROWS * TILE_SIZE)
 # define PI 3.14159265359
 
 typedef struct texture
@@ -57,7 +57,7 @@ typedef struct texture
 	char	*we_file;
 	int		floor_clr;
 	int		ceiling_clr;
-}	t_texture;
+}			t_texture;
 
 typedef struct player
 {
@@ -80,6 +80,12 @@ typedef struct player
 	char	space_type;
 
 }	t_ply;
+
+typedef struct s_ray
+{
+	int	ray_id;
+	int	ray_color;
+}				t_ray;
 
 extern t_texture data;
 
@@ -104,6 +110,7 @@ bool	just_space(char *s);
 void	load_colors(bool *space, int *clr, char *description);
 int		get_rgb_color(int *rgb);
 double	deg_to_rad(double n);
+void	my_mlx_pixel_put(t_ply *p, int x, int y, int color);
 
 /*****************************************/
 
@@ -133,6 +140,33 @@ void		check_player(char **map, int x, int y);
 
 void	player_direction(t_ply *p);
 void	draw_map(t_ply *p);
-void	draw_player(t_ply *p);
+//void	draw_player(t_ply *p);
+
+ /* ************************************** TESTS*/
+typedef struct s_point 
+{
+	double	x;
+	double	y;
+}				t_point;
+
+typedef struct s_lineq
+{
+	double	alpha;
+	double	beta;
+} 				t_lineq;
+
+void	draw_rect(t_ply *p, int x, int y, int len, int color);
+void	draw_map(t_ply *p);
+void	draw_playert(t_ply *p);
+void	draw_line(t_ply *p, t_point a, t_point b);
+t_lineq	cal_alpha(t_point a, t_point b);
+void	draw_rays(t_ply *p);
+void	draw_ray(t_ply *p);
+t_point	set_point(int x, int y);
+
+# define FOV (60 * PI / 180)
+# define NUM_RAYS 100
+# define RAY_LEN TILE_SIZE * 4
+extern int grid[15][15];
 
 #endif

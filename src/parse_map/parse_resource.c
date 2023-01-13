@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:07:31 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/08 18:25:20 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/11 14:56:49 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	parse_line(char **map, int x)
 
 void	check_space(char **map, int x, int y)
 {
-	printf("Check space [%d][%d]\n", x, y);
-	printf("map [%s]\n", map[x - 1]);
+	// printf("Check space [%d][%d]\n", x, y);
+	// printf("map [%s]\n", map[x - 1]);
 	if (y > 0 && (map[x][y - 1] != ' ' &&  map[x][y - 1] != '1'))
 		(printf("SPACE ERR: 1\n"), exit_msg(&map[x][y]));
 	//	return ;
