@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/10 10:37:40 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/13 14:31:21 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,23 @@
 # define WIDTH 600
 # define HEIGHT 600
 # define PI 3.14159265359
+
+typedef struct coordinates
+{
+	double	x;
+	double	y;
+
+}	t_coordinates;
+
+typedef struct intersection_coordinates
+{
+	double	horizontal_x;
+	double	horizontal_y;
+	double	x_step_hoz;
+	double	y_step_hoz;
+	double	x_step_vrt;
+	double	y_step_vrt;
+}	t_intersection;
 
 typedef struct texture
 {
