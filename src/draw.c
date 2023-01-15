@@ -23,6 +23,7 @@ void	draw_map(t_ply *p)
 	}
 	//draw_playert(p);
 	render_ray_all(p);
+	//draw_ray(p);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 }
 
@@ -52,13 +53,20 @@ void	draw_rect(t_ply *p, int x, int y, int len, int color)
 void	draw_ray(t_ply *p)
 {
 	t_point	a;
-	t_point	b;
+	t_ray	ray;
 
-	a = set_point(p->x + p->player_size / 2, p->y + p->player_size / 2);
-	b = set_point(p->x + p->player_size / 2 + cos(p->rotation_angle) * RAY_LEN, \
-	p->y + p->player_size / 2 + sin(p->rotation_angle) * RAY_LEN);
-
-	draw_line(p, a, b);
+	ray.origin = set_point(p->x + p->player_size / 2, p->y + p->player_size / 2);
+	ray.hit_wall = get_wall_hit_point(ray.origin, p->rotation_angle);
+	if (is_facing_right(p->rotation_angle))
+		printf("facing right\n");
+	else
+		printf("facing left\n");
+	if (is_facing_up(p->rotation_angle))
+		printf("facing up\n");
+	else
+		printf("facing down\n");
+	printf("=============== hit point fount at y[%.2f]x[%.2f]\n", ray.hit_wall.y, ray.hit_wall.x);
+	render_ray(p, ray);
 }
 
 double	normalize_angle(double angle)

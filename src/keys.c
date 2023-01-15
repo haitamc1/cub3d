@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:48:26 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/15 12:58:51 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/15 14:43:14 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	field_of_view(t_ply *p, int key)
 {
 	reinitialze_img(p);
 	if (key == RIGHT)
-		p->rotation_angle -= p->rotation_speed;//3 * (PI / 180);
+		p->rotation_angle += p->rotation_speed;//3 * (PI / 180);
 	else if (key == LEFT)
-		p->rotation_angle += p->rotation_speed ;//3 * (PI / 180);
-	printf("Rotation angle [%f]\n", p->rotation_angle);
+		p->rotation_angle -= p->rotation_speed ;//3 * (PI / 180);
 	p->rotation_angle = normalize_angle(p->rotation_angle);
+	printf("Rotation angle [%f]\n", p->rotation_angle);
 	draw_map(p);
 }
 

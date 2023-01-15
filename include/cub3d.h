@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/15 12:39:05 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/15 15:48:04 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ t_lineq	cal_alpha(t_point a, t_point b);
 void	draw_rays(t_ply *p);
 void	draw_ray(t_ply *p);
 t_point	set_point(int x, int y);
-t_bool	has_wall(int x, int y);
+t_bool	has_wall(double x, double y);
 
 t_point	get_vertical_wall_hit_point(t_point a, double angle);
 t_point	get_horizontal_wall_hit_point(t_point a, double angle);
@@ -180,6 +180,8 @@ double	normalize_angle(double angle);
 void	init_rays(t_ply *p, t_ray *ray);
 void	render_ray(t_ply *p, t_ray ray);
 void	render_ray_all(t_ply *p);
+t_bool	is_facing_right(double angle);
+t_bool	is_facing_up(double angle);
 
 # define FOV (60 * PI / 180)
 # define NUM_RAYS WIDTH
