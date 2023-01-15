@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/13 18:24:47 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/15 11:52:51 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct player
 {
 	double	x;
 	double	y;
-	int		step_lenght;
+	int		step;
 	int		tile_size;
 	int		player_size;
 	double	turn_direction;
@@ -163,9 +163,16 @@ t_lineq	cal_alpha(t_point a, t_point b);
 void	draw_rays(t_ply *p);
 void	draw_ray(t_ply *p);
 t_point	set_point(int x, int y);
+t_bool	has_wall(int x, int y);
+
+t_point	get_vertical_wall_hit_point(t_point a, double angle);
+t_point	get_horizontal_wall_hit_point(t_point a, double angle);
+double	get_distance(t_point a, t_point b);
+t_point	get_wall_hit_point(t_point a, double angle);
+double	normalize_angle(double angle);
 
 # define FOV (60 * PI / 180)
-# define NUM_RAYS 100
+# define NUM_RAYS WIDTH
 # define RAY_LEN TILE_SIZE * 4
 extern int grid[15][15];
 

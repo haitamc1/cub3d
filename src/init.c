@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:19:16 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/13 16:01:37 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/14 11:31:27 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_values(t_ply *p)
 {
 	p->y = 5 * TILE_SIZE;
 	p->x = 3 * TILE_SIZE;
-	p->step_lenght = 10;
+	p->step = 5;
 	p->rotation_angle = 0;
 	p->tile_size = TILE_SIZE;
 	p->walk_direction = 0;

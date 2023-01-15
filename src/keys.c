@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:48:26 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/14 11:19:43 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/15 11:53:14 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,49 @@ void	field_of_view(t_ply *p, int key)
 	else if (key == LEFT)
 		p->rotation_angle += p->rotation_speed ;//3 * (PI / 180);
 	printf("Rotation angle [%f]\n", p->rotation_angle);
+	p->rotation_angle = normalize_angle(p->rotation_angle);
 	draw_map(p);
+}
+
+t_bool	has_wall(int x, int y)
+{
+	printf("Wall check x[%d]y[%d]\n", x / TILE_SIZE, y / TILE_SIZE);
+	if (grid[y / TILE_SIZE][x / TILE_SIZE] == 1)
+		return (TRUE);
+	return (FALSE);
 }
 
 void	move_player(t_ply *p, int key)
 {
+	int	new_x;
+	int	new_y;
+
 	reinitialze_img(p);
-	// if (key == A )//&& !is_there_wall(p->x, p->y - p->step_lenght))
-	// 	p->x -= cos(p->rotation_angle) * p->step_lenght;
 	if (key == S || key == W)
 	{
 		if (key == W)
 			p->walk_direction = 1;
 		else
 			p->walk_direction = -1;
-		//&& !is_there_wall(p->x + p->step_lenght, p->y))
-		p->y += sin(p->rotation_angle) * p->step_lenght * p->walk_direction;
-		p->x += cos(p->rotation_angle) * p->step_lenght * p->walk_direction;
+		new_y = sin(p->rotation_angle) * p->step * p->walk_direction;
+		new_x = cos(p->rotation_angle) * p->step * p->walk_direction;
+		if (has_wall(p->x + new_x, p->y + new_y))
+			return ;
+		p->x += new_x;
+		p->y += new_y;
 	}
-	else if (key == D || key == A)//&& !is_there_wall(p->x, p->y + p->step_lenght))
+	else if (key == D || key == A)
 	{
 		if (key == D)
 			p->walk_direction = 1;
 		else
 			p->walk_direction = -1;
-		//&& !is_there_wall(p->x + p->step_lenght, p->y))
-		p->y += sin(p->rotation_angle + (90 * PI / 180)) * p->step_lenght * p->walk_direction;
-		p->x += cos(p->rotation_angle + (90 * PI / 180)) * p->step_lenght * p->walk_direction;
+		new_y = sin(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
+		new_x = cos(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
+		if (has_wall(p->x + new_x, p->y + new_y))
+			return ;
+		p->y += new_y;
+		p->x += new_x;
 	}
 	printf("Player x[%d]y[%d]\n", p->x, p->y);
 	draw_map(p);
