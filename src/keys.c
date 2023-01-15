@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:48:26 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/15 11:53:14 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/15 12:58:51 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,6 @@ void	field_of_view(t_ply *p, int key)
 	printf("Rotation angle [%f]\n", p->rotation_angle);
 	p->rotation_angle = normalize_angle(p->rotation_angle);
 	draw_map(p);
-}
-
-t_bool	has_wall(int x, int y)
-{
-	printf("Wall check x[%d]y[%d]\n", x / TILE_SIZE, y / TILE_SIZE);
-	if (grid[y / TILE_SIZE][x / TILE_SIZE] == 1)
-		return (TRUE);
-	return (FALSE);
 }
 
 void	move_player(t_ply *p, int key)
