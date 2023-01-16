@@ -22,10 +22,22 @@
 # include <fcntl.h>
 # include <math.h>
 # include "mlx.h"
-# define ESC 53
 
 //*********FOR_CHANGING_THE_FIELD_OF_VIEW**********//
 
+#ifdef __linux__ 
+
+# define ESC 65307
+# define A 97
+# define S 115
+# define D 100
+# define W 119
+# define RIGHT 65363 
+# define LEFT 65361
+
+#else
+
+# define ESC 53
 # define RIGHT 124 
 # define LEFT 123
 
@@ -38,6 +50,7 @@
 # define D 2
 # define W 13
 
+#endif
 //******************************//
 
 # define WALL_CLR 0x00f00ff0

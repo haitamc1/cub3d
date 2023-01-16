@@ -31,6 +31,7 @@ LIB_FT = lib/libft/
 LIB_GNL = lib/get_next_line/
 
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS_LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 # Header files
 M_INCLUDE = $(addsuffix .h, $(M_INCLUDE_NAME))
@@ -55,6 +56,11 @@ $(NAME) : $(M_OBJ) $(M_INCLUDE_PATH)
 	make bonus -C $(LIB_FT)
 	make bonus -C $(LIB_GNL)
 	$(CC) $(MLX_FLAGS) $(FALGS) $(LFLAGS)  $(M_OBJ) $(LIBS) -o $(NAME)
+
+linux : $(M_OBJ) $(M_INCLUDE_PATH)
+	make bonus -C $(LIB_FT)
+	make bonus -C $(LIB_GNL)
+	$(CC) $(M_OBJ) $(MLX_FLAGS_LINUX) $(FALGS) $(LFLAGS) $(LIBS) -o $(NAME)
 
 $(BUILD_DIR)%.c.o : %.c $(M_INCLUDE_PATH)
 	@mkdir -p $(dir $@)

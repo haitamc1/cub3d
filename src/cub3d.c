@@ -12,7 +12,7 @@
 
 #include "../include/cub3d.h"
 
-t_texture data;
+//t_texture data;
 
 // int		grid[15][15] = {
 //             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
