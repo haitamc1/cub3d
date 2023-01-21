@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/15 15:48:04 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/21 20:57:38 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,10 +195,13 @@ void	render_ray(t_ply *p, t_ray ray);
 void	render_ray_all(t_ply *p);
 t_bool	is_facing_right(double angle);
 t_bool	is_facing_up(double angle);
+void	line_dda(t_ply *p, t_point a, t_point b);
+void	draw_walls(t_ply *p, t_ray *ray);
+void	draw_horiz_line(t_ply *p, int x, double distance);
 
 # define FOV (60 * PI / 180)
 # define NUM_RAYS WIDTH
 # define RAY_LEN TILE_SIZE * 4
 extern int grid[15][15];
-
+# define ZOOM 1
 #endif

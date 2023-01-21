@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:40:16 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/15 16:11:32 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/21 12:06:51 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,12 @@ void	draw_line(t_ply *p, t_point a, t_point b)
 	double		step;
 	t_lineq		ln;
 
-	// printf("A: x[%.0f] | y[%.0f]\n", a.x, a.y);
-	// printf("B: x[%.0f] | y[%.0f]\n", b.x, b.y);
 	ln = cal_alpha(a,b);
 	x = fmin(a.x, b.x);
 	x_end = fmax(a.x, b.x);
 	step =  (x_end - x) / (RAY_LEN * 3);
-	// printf("alpha[%f] | beta[%f]\n", ln.alpha, ln.beta);
-	// printf("step [%f]\n", step);
+	printf("alpha[%f] | beta[%f]\n", ln.alpha, ln.beta);
+	printf("step [%f]\n", step);
 	while (x < x_end)
 	{
 		y = ln.alpha * x + ln.beta;
@@ -52,6 +50,37 @@ void	draw_line(t_ply *p, t_point a, t_point b)
 double	get_distance(t_point a, t_point b)
 {
 	return (sqrt(pow(b.x - a.x, 2) + pow(b.y - a.y, 2)));
+}
+
+void	line_dda(t_ply *p, t_point a, t_point b)
+{
+	double	dx;
+	double	dy;
+	double	x;
+	double	y;
+	int		i;
+	double	step;
+
+	printf("A: x[%.2f] | y[%.2f]\n", a.x, a.y);
+	printf("B: x[%.2f] | y[%.2f]\n", b.x, b.y);
+	dx = b.x - a.x;
+	dy = b.y - a.y;
+	if (fabs(dx) >= fabs(dy))
+		step = fabs(dx);
+	else
+		step = fabs(dy);
+	dx = dx / step;
+	dy = dy / step;
+	x = a.x;
+	y = a.y;
+	i = 0;
+	while (i < step)
+	{
+		x = x + dx;
+		y = y + dy;
+		i++;
+		my_mlx_pixel_put(p, x, y, 0xf80011);
+	}
 }
 
 t_point	set_point(int x, int y)

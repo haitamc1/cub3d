@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:48:26 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/15 14:43:14 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/21 21:34:52 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	field_of_view(t_ply *p, int key)
 	else if (key == LEFT)
 		p->rotation_angle -= p->rotation_speed ;//3 * (PI / 180);
 	p->rotation_angle = normalize_angle(p->rotation_angle);
-	printf("Rotation angle [%f]\n", p->rotation_angle);
+	//printf("Rotation angle [%f]\n", p->rotation_angle);
 	draw_map(p);
 }
 
@@ -64,7 +64,7 @@ void	move_player(t_ply *p, int key)
 		p->y += new_y;
 		p->x += new_x;
 	}
-	printf("Player x[%d]y[%d]\n", p->x, p->y);
+	//printf("Player x[%.2f]y[%.2f]\n", p->x, p->y);
 	draw_map(p);
 }
 
