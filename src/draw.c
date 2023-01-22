@@ -96,12 +96,14 @@ void	draw_horiz_line(t_ply *p, int x, double distance)
 	if (y_bottom >= HEIGHT)
 		y_bottom = HEIGHT - 1;
 	//printf("y_top[%.0f] -- y_bottom[%.0f] && wall height is %.0f\n", y_top, y_bottom, wall_height);
+	draw_ceiling(p, x, y_top);
 	while (y_top < y_bottom)
 	{
 		my_mlx_pixel_put(p, x, y_top, 0xc3b091);
 		///printf("drawing pixel %.0f\n", y_top);
 		y_top++;
 	}
+	draw_floor(p, x, y_bottom);
 }
 
 void	draw_walls(t_ply *p, t_ray *ray)
@@ -123,4 +125,28 @@ void	my_mlx_pixel_put(t_ply *p, int x, int y, int color)
 
 	dst = p->addr + (y * p->line_length + x * (p->bits_per_pixel / 8));
 	*(unsigned int *) dst = color;
+}
+
+void	draw_ceiling(t_ply *p, int x, int y_end)
+{
+	int	j;
+
+	j = 0;
+	while (j < y_end)
+	{
+		my_mlx_pixel_put(p, x, j, 0x335379);
+		j++;
+	}
+}
+
+void	draw_floor(t_ply *p, int x, int y_start)
+{
+	int	j;
+
+	j = y_start;
+	while (j < HEIGHT)
+	{
+		my_mlx_pixel_put(p, x, j, 0xcdcace);
+		j++;
+	}
 }
