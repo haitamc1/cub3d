@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:43:42 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/22 13:00:52 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/22 16:47:55 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,28 @@ t_point	get_vertical_wall_hit_point(t_point a, double angle)
 	}
 }
 
-t_point	get_wall_hit_point(t_point a, double angle)
+void	set_wall_hit_point(t_ray *ray, double angle)
+{
+	t_point	vertical_hit_point;
+	t_point	horizontal_hit_point;
+
+	vertical_hit_point = get_vertical_wall_hit_point(ray->origin, angle);
+	horizontal_hit_point = get_horizontal_wall_hit_point(ray->origin, angle);
+	if (get_distance(ray->origin, vertical_hit_point) > get_distance(ray->origin, horizontal_hit_point))
+	{
+		ray->hit_wall = horizontal_hit_point;
+		ray->hit_type = HORZ;
+		ray->texture = (int) horizontal_hit_point.x % TILE_SIZE;
+	}
+	else
+	{
+		ray->hit_wall = vertical_hit_point;
+		ray->hit_type = VERT;
+		ray->texture = (int) vertical_hit_point.y % TILE_SIZE;
+	}
+}
+
+e_hit_type	get_wall_hit_type(t_point a, double angle)
 {
 	t_point	vertical_hit_point;
 	t_point	horizontal_hit_point;
@@ -99,8 +120,8 @@ t_point	get_wall_hit_point(t_point a, double angle)
 	vertical_hit_point = get_vertical_wall_hit_point(a, angle);
 	horizontal_hit_point = get_horizontal_wall_hit_point(a, angle);
 	if (get_distance(a, vertical_hit_point) > get_distance(a, horizontal_hit_point))
-		return (horizontal_hit_point);
-	return (vertical_hit_point);
+		return (HORZ);
+	return (VERT);
 }
 
 t_bool	has_wall(double x, double y)

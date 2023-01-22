@@ -55,7 +55,7 @@ void	draw_ray(t_ply *p)
 	t_ray	ray;
 
 	ray.origin = set_point(p->x + p->player_size / 2, p->y + p->player_size / 2);
-	ray.hit_wall = get_wall_hit_point(ray.origin, p->rotation_angle);
+	set_wall_hit_point(&ray, p->rotation_angle);
 	if (is_facing_right(p->rotation_angle))
 		printf("facing right\n");
 	else
@@ -78,15 +78,17 @@ double	normalize_angle(double angle)
 	return (new_angle);
 }
 
-void	draw_horiz_line(t_ply *p, int x, double distance)
+void	draw_wall_strip(t_ply *p, t_ray ray, int x)
 {
 	double	y_top;
 	double	y_bottom;
 	double	perp_distance;
 	double	wall_height;
 	double	plane_distance;
+	double	distance;
 
 	//printf("my distance is %.0f\n", distance);
+	distance = ray.distance * cos(ray.angle - p->rotation_angle);
 	plane_distance = (WIDTH / 2) / tan(FOV / 2);
 	wall_height = TILE_SIZE / distance * plane_distance;
 	y_top = (WIDTH / 2) - (wall_height / 2);
@@ -99,7 +101,10 @@ void	draw_horiz_line(t_ply *p, int x, double distance)
 	draw_ceiling(p, x, y_top);
 	while (y_top < y_bottom)
 	{
-		my_mlx_pixel_put(p, x, y_top, 0xc3b091);
+		if (ray.hit_type == HORZ)
+			my_mlx_pixel_put(p, x, y_top, 0xc3b091);
+		else
+			my_mlx_pixel_put(p, x, y_top, 0xefe7ce);
 		///printf("drawing pixel %.0f\n", y_top);
 		y_top++;
 	}
@@ -113,7 +118,7 @@ void	draw_walls(t_ply *p, t_ray *ray)
 	i = 0;
 	while (i < NUM_RAYS)
 	{
-		draw_horiz_line(p, i, ray[i].distance * cos(ray[i].angle - p->rotation_angle));
+		draw_wall_strip(p, ray[i], i);
 		//printf("drawing strip %d\n", i);
 		i++;
 	}

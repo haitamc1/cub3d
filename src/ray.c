@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:42:10 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/21 21:22:39 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/22 16:42:48 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_rays(t_ply *p, t_ray *ray)
 		angle = normalize_angle(angle);
 		ray[i].angle = angle;
 		ray[i].origin = p_pos;
-		ray[i].hit_wall = get_wall_hit_point(p_pos, angle);
+		set_wall_hit_point(&ray[i], angle);
 		//printf("hit point for  %d y[%.2f]x[%.2f]\n", i, ray[i].hit_wall.y, ray[i].hit_wall.x);
 		ray[i].distance = get_distance(p_pos, ray[i].hit_wall);
 		angle += angle_increment;

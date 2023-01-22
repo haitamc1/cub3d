@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/22 13:14:35 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/22 16:50:29 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,18 +162,27 @@ typedef struct s_lineq
 	double	beta;
 } 				t_lineq;
 
+typedef enum hit_type
+{
+	HORZ,
+	VERT,
+}			e_hit_type;
+
 typedef struct s_ray
 {
-	int		id;
-	t_point	origin;
-	double	angle;
-	t_bool	is_facing_up;	
-	t_bool	is_facing_down;	
-	t_bool	is_facing_left;	
-	t_bool	is_facing_right;
-	t_point	hit_wall;
-	double	distance;
+	int			id;
+	t_point		origin;
+	double		angle;
+	t_bool		is_facing_up;	
+	t_bool		is_facing_down;	
+	t_bool		is_facing_left;	
+	t_bool		is_facing_right;
+	t_point		hit_wall;
+	e_hit_type	hit_type;
+	double		distance;
+	int			texture;
 }				t_ray;
+
 
 void	draw_rect(t_ply *p, int x, int y, int len, int color);
 void	draw_map(t_ply *p);
@@ -188,7 +197,7 @@ t_bool	has_wall(double x, double y);
 t_point	get_vertical_wall_hit_point(t_point a, double angle);
 t_point	get_horizontal_wall_hit_point(t_point a, double angle);
 double	get_distance(t_point a, t_point b);
-t_point	get_wall_hit_point(t_point a, double angle);
+void	set_wall_hit_point(t_ray *ray, double angle);
 double	normalize_angle(double angle);
 void	init_rays(t_ply *p, t_ray *ray);
 void	render_ray(t_ply *p, t_ray ray);
@@ -197,9 +206,10 @@ t_bool	is_facing_right(double angle);
 t_bool	is_facing_up(double angle);
 void	line_dda(t_ply *p, t_point a, t_point b);
 void	draw_walls(t_ply *p, t_ray *ray);
-void	draw_horiz_line(t_ply *p, int x, double distance);
+void	draw_wall_strip(t_ply *p, t_ray ray, int x);
 void	draw_ceiling(t_ply *p, int x, int y_end);
 void	draw_floor(t_ply *p, int x, int y_start);
+e_hit_type	get_wall_hit_type(t_point a, double angle);
 
 # define FOV (60 * PI / 180)
 # define NUM_RAYS WIDTH
