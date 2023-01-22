@@ -31,11 +31,6 @@ void	draw_map(t_ply *p)
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 }
 
-void	draw_playert(t_ply *p)
-{
-	draw_rect(p, p->x, p->y, p->player_size, 0x964f6b);
-}
-
 void	draw_rect(t_ply *p, int x, int y, int len, int color)
 {
 	int	i;
@@ -120,4 +115,12 @@ void	draw_walls(t_ply *p, t_ray *ray)
 		//printf("drawing strip %d\n", i);
 		i++;
 	}
+}
+
+void	my_mlx_pixel_put(t_ply *p, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = p->addr + (y * p->line_length + x * (p->bits_per_pixel / 8));
+	*(unsigned int *) dst = color;
 }

@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:43:24 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/13 20:11:50 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/10 10:56:15 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-//t_texture data;
+t_texture data;
 
-// int		grid[15][15] = {
-//             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-//             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-//             {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-//             {1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-//             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-//             {1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
-//             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//             {1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1},
-//             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-//             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-//             {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
-//             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-// 				};
+int		grid[15][15] = {
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+            {1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+				};
 
 void	my_mlx_pixel_put(t_ply *p, int x, int y, int color)
 {
@@ -194,16 +194,14 @@ void	player_direction(t_ply *p)
 	while (j < ray_count)
 	{
 		i = 0;
-		while (!is_there_wall(x = i * cos(p->rotation_angle + \
-		deg_to_rad(j)) + p->x, y = i * sin(p->rotation_angle + \
-		deg_to_rad(j)) + p->y))
+		while (!is_there_wall(x = i * cos(p->rotation_angle + deg_to_rad(j)) + p->x, y = i * sin(p->rotation_angle + deg_to_rad(j)) + p->y))
 		{
 			x = i * cos(p->rotation_angle + deg_to_rad(j)) + p->x;
 			y = i * sin(p->rotation_angle + deg_to_rad(j)) + p->y;
 			my_mlx_pixel_put(p, y, x, 0x0000ff00);
 			i++;
 		}
-		j += 1;
+		j += 0.1;
 	}
 	i = 0;
 	j = 0;
@@ -221,48 +219,48 @@ void	player_direction(t_ply *p)
 	}
 }
 
-// void	draw_map(t_ply *p)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	x;
-// 	int	y;
+void	draw_map(t_ply *p)
+{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
 
-// 	i = 0;
-// 	j = 0;
-// 	x = 0;
-// 	y = 0;
-// 	while (i < (MAP_ROWS * p->tile_size) && x < 15)
-// 	{
-// 		j = 0;
-// 		y = 0;
-// 		while (j < (MAP_COLS * p->tile_size) && y < 15)
-// 		{
-// 			if (grid[y][x] == 1)
-// 				rectangle(p, i, j, WALL_CLR);
-// 			j += p->tile_size;
-// 			y++;
-// 		}
-// 		i += p->tile_size;
-// 		x++;
-// 	}
-// 	draw_player(p);
-// 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
-// }
+	i = 0;
+	j = 0;
+	x = 0;
+	y = 0;
+	while (i < (MAP_ROWS * p->tile_size) && x < 15)
+	{
+		j = 0;
+		y = 0;
+		while (j < (MAP_COLS * p->tile_size) && y < 15)
+		{
+			if (grid[y][x] == 1)
+				rectangle(p, i, j, WALL_CLR);
+			j += p->tile_size;
+			y++;
+		}
+		i += p->tile_size;
+		x++;
+	}
+	draw_player(p);
+	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
+}
 
-// int	main(int ac, char **av)
-// {
-// 	t_ply	p;
+int	main(int ac, char **av)
+{
+	t_ply	p;
 
-// 	if (ac == 2)
-// 	{
-// 		// check_file_extension(av[1], ".cub");
-// 		init_values(&p);
-// 		draw_map(&p);
-// 		mlx_hook(p.win, 17, 0, &cross, &p);
-// 		mlx_hook(p.win, 2, 1L << 0, &key, &p);
-// 		mlx_loop(p.mlx);
-// 	}
-// 	else
-// 		str("INVALID NUMBER OF ARGUMENTS\n");
-// }
+	if (ac == 2)
+	{
+		// check_file_extension(av[1], ".cub");
+		init_values(&p);
+		draw_map(&p);
+		mlx_hook(p.win, 17, 0, &cross, &p);
+		mlx_hook(p.win, 2, 1L << 0, &key, &p);
+		mlx_loop(p.mlx);
+	}
+	else
+		str("INVALID NUMBER OF ARGUMENTS\n");
+}

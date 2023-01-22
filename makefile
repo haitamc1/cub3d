@@ -14,11 +14,11 @@ M_SRC_DRAW_DIR = src/draw/
 
 FALGS = -Wall -Wextra -fsanitize=address -g#-Werror #
 
-M_SRC_PARSE_NAME =   utils utils1 loading_data parse_resource #ft_split ft_atoi  ft_isdigit
+M_SRC_PARSE_NAME = utils utils1 utils2 loading_data parse_resource #ft_split ft_atoi  ft_isdigit
 
 M_SRC_DRAW_NAME = 
 
-M_SRC_PRIME_NAME = cub3d keys init  main draw line ray  wall_hit
+M_SRC_PRIME_NAME = control init_cub3d  main draw line ray  wall
 
 BUILD_DIR = build/
 
@@ -66,7 +66,7 @@ $(BUILD_DIR)%.c.o : %.c $(M_INCLUDE_PATH)
 	@mkdir -p $(dir $@)
 	$(CC) $(FALGS) $(IFLAGS) -c $< -o $@
 
-clean : 
+clean :
 	@make clean -C $(LIB_GNL)
 	@make clean -C $(LIB_FT)
 	rm -rf $(BUILD_DIR)
