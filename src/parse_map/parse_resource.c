@@ -6,23 +6,23 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:07:31 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/11 14:56:49 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/23 21:12:47 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-char **parse_resources(char **map)
+char **parse_resources(t_ply *p, char **map)
 {
 	int			i;
 
 	i = 0;
-	while (!filled_texture_check(data) && map[i])
+	while (!filled_texture_check(&p->txt) && map[i])
 	{
 		if (just_space(map[i]) || map[i][0] == '\n')
 			i++;
 		else
-			get_texture(map[i++], &data);
+			get_texture(map[i++], &p->txt);
 	}
 	while (map[i] && (just_space(map[i]) || map[i][0] == '\n'))
 		i++;
@@ -37,6 +37,7 @@ int	parse_map(char **map)
 	while (map[x])
 	{
 		parse_line(map, x);
+		//printf("%s\n", map[x]);
 		x++;
 		//break ;
 
@@ -52,8 +53,11 @@ void	parse_line(char **map, int x)
 	y = 0;
 	while (map[x][y])
 	{
+		//printf("%c", map[x][y]);
 		if (is_valid_token(map[x][y]) == FALSE)
+		{
 			exit_msg("INVALID TOKEN IN MAP\n");
+		}
 		if (map[x][y] == ' ')
 			check_space(map, x, y);
 		else if (map[x][y] == '0')
@@ -62,7 +66,7 @@ void	parse_line(char **map, int x)
 		// 	check_space(map, x, y);
 		else if (is_player_pos(map[x][y]))
 		{
-			check_player(map, x, y);
+			//check_player(map, x, y);
 			ply_pos += is_player_pos(map[x][y]);
 		}
 		y++;
@@ -102,16 +106,3 @@ void	check_zero(char **map, int x, int y)
 		exit_msg("MAP ZERO\n");
 }
 
-void	check_player(char **map, int x, int y)
-{
-	//printf("Check space [%d][%d]\n", x, y);
-	//printf("map [%s]\n", map[x - 1]);
-	if (y > 0 && is_valid_token(map[x - 1][y]) == FALSE)
-		(printf("PLAYER ERR: 1\n"), exit_msg(&map[x][y]));
-	if (is_valid_token(map[x - 1][y]) == FALSE)
-		(printf("PLAYER ERR: 2\n"), exit_msg(&map[x][y]));
-	if (ft_strlen(map[x - 1]) < y || is_valid_token(map[x - 1][y]) == FALSE)
-		(printf("PLAYER ERR: 3\n"), exit_msg(&map[x][y]));
-	if (ft_strlen(map[x + 1]) < y ||  is_valid_token(map[x + 1][y]) == FALSE)
-		(printf("PLAYER ERR: 4\n"),exit_msg(&map[x][y]));
-}

@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:19:16 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/22 12:48:29 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/23 19:17:04 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	init_textures(t_texture *data)
 
 void	init_values(t_ply *p)
 {
+	int		data;
+
 	p->y = 5 * TILE_SIZE;
 	p->x = 3 * TILE_SIZE;
 	p->step = 15;

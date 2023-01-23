@@ -13,26 +13,29 @@ int		grid[15][15] = {
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
             {1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1},
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1},
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
             {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 				};
 
 void	print_test();
+void	print_map(char **map);
 
 int	main(int ac, char **av)
 {
 	t_ply	p;
 
 	init_textures(&data);
-	printf("len is %d\n", ft_chardp_len(av));
 	if (ac == 2)
 	{
-		// check_file_extension(av[1], ".cub");
-		//check_map(get_map(av[1]));
+		//check_file_extension(av[1], ".cub");
 		init_values(&p);
+		init_textures(&p.txt);
+		check_map(&p, get_map(av[1]));
+		load_textures(&p);
+		print_map(p.map);
 		draw_map(&p);
 		// draw_line(&p, set_point(100, 100), set_point(300, 300));
 		// draw_line(&p, set_point(300, 100), set_point(100, 300));
@@ -53,4 +56,23 @@ void	print_test()
 	printf("file{%s}\n", data.we_file);
 	printf("file{%d}\n", data.ceiling_clr);
 	printf("file{%d}\n", data.floor_clr);
+}
+
+void	print_map(char **map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < MAP_COLS)
+	{
+		x = 0;
+		while (x < MAP_ROWS)
+		{
+			printf("%c", map[y][x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
 }

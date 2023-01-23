@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 12:44:09 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/22 12:44:45 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/23 19:06:03 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,29 @@ void	check_resource(char *direction, char *path, t_texture *check)
 		check->ceiling_clr = get_clr(path);
 	else
 		exit_msg("MAP ERROR\n");
+}
+
+void	load_textures(t_ply *p)
+{
+	p->txt.no_txtr = get_txtr(p, p->txt.no_file);
+	p->txt.so_txtr = get_txtr(p, p->txt.so_file);
+	p->txt.ea_txtr = get_txtr(p, p->txt.ea_file);
+	p->txt.we_txtr = get_txtr(p, p->txt.we_file);
+}
+
+char	*get_txtr(t_ply *p, char *file)
+{
+	int		len;
+	int		width;
+	int		height;
+	char	*adr;
+	void	*img;
+
+	img = mlx_xpm_file_to_image(p->mlx, file, &width, &height);
+	if (img == NULL)
+		exit_msg("Importing texture error\n");
+	if (width != TILE_SIZE || height != TILE_SIZE)
+		exit_msg("Texture lenght and height should match TILE_SIZE\n ");
+	adr = mlx_get_data_addr(img, &p->txt.bpp, &p->txt.len, &p->endian);
+	return (adr);
 }

@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/22 16:50:29 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/23 20:17:08 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@
 # define MAP_ROWS 15
 # define MAP_COLS 15
 
-# define TILE_SIZE 40
+# define TILE_SIZE 64
 # define WIDTH (MAP_COLS * TILE_SIZE)
 # define HEIGHT (MAP_ROWS * TILE_SIZE)
 # define PI 3.14159265359
@@ -68,8 +68,14 @@ typedef struct texture
 	char	*so_file;
 	char	*ea_file;
 	char	*we_file;
+	char	*no_txtr;
+	char	*so_txtr;
+	char	*ea_txtr;
+	char	*we_txtr;
 	int		floor_clr;
 	int		ceiling_clr;
+	int		len;
+	int		bpp;
 }			t_texture;
 
 typedef struct player
@@ -91,6 +97,8 @@ typedef struct player
 	int		line_length;
 	int		endian;
 	char	space_type;
+	char	**map;
+	t_texture	txt;
 
 }	t_ply;
 
@@ -130,9 +138,9 @@ int			cross(t_ply *p);
 int			mouse_hook(int key, int i, int j, t_ply *p);
 void		init(t_ply *p);
 void		check_file_extension(char *file, char *extension);
-char 		**parse_resources(char **map);
+char 		**parse_resources(t_ply *p, char **map);
 void		init_textures(t_texture *data);
-void		check_map(char **map);
+void		check_map(t_ply *p, char **map);
 char		**get_map(char *file);
 bool		is_space(char c);
 void		check_space(char **map, int x, int y);
@@ -141,7 +149,7 @@ int			parse_map(char **map);
 void		parse_line(char **map, int x);
 t_bool		is_valid_token(char c);
 t_bool		is_player_pos(char c);
-bool		filled_texture_check(t_texture s);
+bool		filled_texture_check(t_texture *s);
 void		check_player(char **map, int x, int y);
 
 
@@ -192,12 +200,12 @@ t_lineq	cal_alpha(t_point a, t_point b);
 void	draw_rays(t_ply *p);
 void	draw_ray(t_ply *p);
 t_point	set_point(int x, int y);
-t_bool	has_wall(double x, double y);
+t_bool	has_wall(char **map, double x, double y);
 
-t_point	get_vertical_wall_hit_point(t_point a, double angle);
-t_point	get_horizontal_wall_hit_point(t_point a, double angle);
+t_point	get_vertical_wall_hit_point(char **map, t_point a, double angle);
+t_point	get_horizontal_wall_hit_point(char **map, t_point a, double angle);
 double	get_distance(t_point a, t_point b);
-void	set_wall_hit_point(t_ray *ray, double angle);
+void	set_wall_hit_point(char **map, t_ray *ray, double angle);
 double	normalize_angle(double angle);
 void	init_rays(t_ply *p, t_ray *ray);
 void	render_ray(t_ply *p, t_ray ray);
@@ -210,6 +218,9 @@ void	draw_wall_strip(t_ply *p, t_ray ray, int x);
 void	draw_ceiling(t_ply *p, int x, int y_end);
 void	draw_floor(t_ply *p, int x, int y_start);
 e_hit_type	get_wall_hit_type(t_point a, double angle);
+int		get_mlx_pixel_color(t_ply *p, char *txt, int x, int y);
+char	*get_txtr(t_ply *p, char *file);
+void	load_textures(t_ply *p);
 
 # define FOV (60 * PI / 180)
 # define NUM_RAYS WIDTH

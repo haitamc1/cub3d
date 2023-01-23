@@ -55,7 +55,7 @@ void	draw_ray(t_ply *p)
 	t_ray	ray;
 
 	ray.origin = set_point(p->x + p->player_size / 2, p->y + p->player_size / 2);
-	set_wall_hit_point(&ray, p->rotation_angle);
+	set_wall_hit_point(p->map, &ray, p->rotation_angle);
 	if (is_facing_right(p->rotation_angle))
 		printf("facing right\n");
 	else
@@ -82,12 +82,13 @@ void	draw_wall_strip(t_ply *p, t_ray ray, int x)
 {
 	double	y_top;
 	double	y_bottom;
-	double	perp_distance;
 	double	wall_height;
+	double	distance_from_top;
 	double	plane_distance;
 	double	distance;
+	void	*wall_texture;
+	double	j;
 
-	//printf("my distance is %.0f\n", distance);
 	distance = ray.distance * cos(ray.angle - p->rotation_angle);
 	plane_distance = (WIDTH / 2) / tan(FOV / 2);
 	wall_height = TILE_SIZE / distance * plane_distance;
@@ -99,14 +100,22 @@ void	draw_wall_strip(t_ply *p, t_ray ray, int x)
 		y_bottom = HEIGHT - 1;
 	//printf("y_top[%.0f] -- y_bottom[%.0f] && wall height is %.0f\n", y_top, y_bottom, wall_height);
 	draw_ceiling(p, x, y_top);
-	while (y_top < y_bottom)
+	j = y_top;
+	while (j < y_bottom)
 	{
+		distance_from_top = j + wall_height / 2 - WIDTH / 2;
+		//printf("y[%.1f]and x[%.d]\n", j, x);
+		//printf("texture y[%d]and x[%d]\n", (int)((j - y_top) * TILE_SIZE / wall_height), ray.texture);
 		if (ray.hit_type == HORZ)
-			my_mlx_pixel_put(p, x, y_top, 0xc3b091);
+			//my_mlx_pixel_put(p, x, j, 0xc3b091);
+			my_mlx_pixel_put(p, x, j, \
+			get_mlx_pixel_color(p, p->txt.no_txtr, ray.texture, distance_from_top * TILE_SIZE / wall_height));
 		else
-			my_mlx_pixel_put(p, x, y_top, 0xefe7ce);
-		///printf("drawing pixel %.0f\n", y_top);
-		y_top++;
+			//my_mlx_pixel_put(p, x, j, 0xefe7ce);
+			my_mlx_pixel_put(p, x, j, \
+			get_mlx_pixel_color(p, p->txt.so_txtr, ray.texture, distance_from_top * TILE_SIZE / wall_height));
+		///printf("drawing pixel %.0f\n", j);
+		j++;
 	}
 	draw_floor(p, x, y_bottom);
 }
@@ -130,6 +139,14 @@ void	my_mlx_pixel_put(t_ply *p, int x, int y, int color)
 
 	dst = p->addr + (y * p->line_length + x * (p->bits_per_pixel / 8));
 	*(unsigned int *) dst = color;
+}
+
+int	get_mlx_pixel_color(t_ply *p, char *txt, int x, int y)
+{
+	char	*dst;
+
+	dst = txt + (y * p->txt.len + x * (p->txt.bpp / 8));
+	return (*(unsigned int *) dst);
 }
 
 void	draw_ceiling(t_ply *p, int x, int y_end)

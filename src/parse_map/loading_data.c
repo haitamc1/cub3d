@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/08 16:22:07 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/23 21:01:28 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ char	*get_texture_file(char *s)
 // 	}
 // }
 
-bool	filled_texture_check(t_texture s)
+bool	filled_texture_check(t_texture *s)
 {
-	if (s.ea_file && s.we_file && s.no_file && s.so_file \
-		&& s.floor_clr != -1 && s.ceiling_clr != -1)
+	if (s->ea_file && s->we_file && s->no_file && s->so_file \
+		&& s->floor_clr != -1 && s->ceiling_clr != -1)
 		return (1);
 	return (0);
 }
@@ -115,6 +115,7 @@ char	**get_map(char *file)
 		i++;
 		tmp = get_next_line(fd);
 		map[i] = ft_strtrim(tmp, "\n");
+		//printf("%s\n", map[i]);
 		free(tmp);
 	}
 	map[++i] = NULL;
@@ -138,17 +139,18 @@ int	skip_space(char *s, int	i)
 	return (i);
 }
 
-void	check_map(char **map)
+void	check_map(t_ply *p, char **map)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	map = parse_resources(map);
+	map = parse_resources(p, map);
 	// printf("|%s|", *map);
 	// printf("|%s|", *(map + 1));
 	parse_map(map);
+	p->map = map;
 	// if (!map[i])
 	// 	exit_msg("INCOMPLETE MAP\n");
 	// while (just_space(map[i]) || map[i][0] == '\n')
