@@ -6,13 +6,13 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:43:42 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/24 16:05:05 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 20:19:45 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-t_point	get_horizontal_wall_hit_point(char **map, t_point a, double angle)
+t_point	get_horizontal_wall_hit_point(t_ply *p, t_point a, double angle)
 {
 	double	xstep;
 	double	ystep;
@@ -35,7 +35,7 @@ t_point	get_horizontal_wall_hit_point(char **map, t_point a, double angle)
 		ycheck = first_intersection.y - 1;
 	else 
 		ycheck = first_intersection.y + 1;
-	if (has_wall(map, first_intersection.x, ycheck))
+	if (has_wall(p, first_intersection.x, ycheck))
 		return (first_intersection);
 	while (first_intersection.x < WIDTH && first_intersection.y < HEIGHT \
 		&& first_intersection.x >=0 && first_intersection.y >= 0)
@@ -46,12 +46,12 @@ t_point	get_horizontal_wall_hit_point(char **map, t_point a, double angle)
 			ycheck = first_intersection.y - 1;
 		else
 			ycheck = first_intersection.y + 1;
-		if (has_wall(map, first_intersection.x, ycheck))
+		if (has_wall(p, first_intersection.x, ycheck))
 			return (first_intersection);
 	}
 }
 
-t_point	get_vertical_wall_hit_point(char **map, t_point a, double angle)
+t_point	get_vertical_wall_hit_point(t_ply *p, t_point a, double angle)
 {
 	double	xstep;
 	double	ystep;
@@ -75,7 +75,7 @@ t_point	get_vertical_wall_hit_point(char **map, t_point a, double angle)
 		xcheck = first_intersection.x + 1;
 	else
 		xcheck = first_intersection.x - 1;
-	if (has_wall(map, xcheck, first_intersection.y))
+	if (has_wall(p, xcheck, first_intersection.y))
 		return (first_intersection);
 	while (first_intersection.x < WIDTH && first_intersection.y < HEIGHT \
 	&& first_intersection.x >= 0 && first_intersection.y >= 0)
@@ -86,19 +86,20 @@ t_point	get_vertical_wall_hit_point(char **map, t_point a, double angle)
 			xcheck = first_intersection.x + 1;
 		else
 			xcheck = first_intersection.x - 1;
-		if (has_wall(map, xcheck, first_intersection.y))
+		if (has_wall(p, xcheck, first_intersection.y))
 			return (first_intersection);
 	}
 }
 
-void	set_wall_hit_point(char **map, t_ray *ray, double angle)
+void	set_wall_hit_point(t_ply *p, t_ray *ray, double angle)
 {
 	t_point	vertical_hit_point;
 	t_point	horizontal_hit_point;
 
-	vertical_hit_point = get_vertical_wall_hit_point(map, ray->origin, angle);
-	horizontal_hit_point = get_horizontal_wall_hit_point(map, ray->origin, angle);
-	if (get_distance(ray->origin, vertical_hit_point) > get_distance(ray->origin, horizontal_hit_point))
+	vertical_hit_point = get_vertical_wall_hit_point(p, ray->origin, angle);
+	horizontal_hit_point = get_horizontal_wall_hit_point(p, ray->origin, angle);
+	if (get_distance(ray->origin, vertical_hit_point) > \
+		get_distance(ray->origin, horizontal_hit_point))
 	{
 		ray->hit_wall = horizontal_hit_point;
 		ray->hit_type = HORZ;
@@ -110,21 +111,34 @@ void	set_wall_hit_point(char **map, t_ray *ray, double angle)
 		ray->hit_type = VERT;
 		ray->x_txt = (int) vertical_hit_point.y % TILE_SIZE;
 	}
-	//printf("wall hit at y[%d]x[%d]\n", (int) (ray->hit_wall.y / TILE_SIZE), \
-	(int) (ray->hit_wall.x / TILE_SIZE));
 }
 
-t_bool	has_wall(char **map, double x, double y)
+t_bool	has_wall(t_ply *p, double x, double y)
 {
-	int	xcheck;
-	int	ycheck;
+	int		xcheck;
+	int		ycheck;
+	char	**map;
+
+	map = p->map;
 	if (x > WIDTH || y > HEIGHT || x < 0 || y < 0)
-		return (/*printf("out of bounds y[%.2f]x[%.2f]\n", y, x),*/ TRUE);
+		return (TRUE);
 	xcheck = floor(x / TILE_SIZE);
 	ycheck = floor(y/ TILE_SIZE);
-	//printf("map token is [%c]\n", map[ycheck][xcheck]);
-	//printf("Wall check y[%d]x[%d]\n", ycheck, xcheck);
 	if (map[ycheck][xcheck] == '1')
+		return (TRUE);
+	if (ycheck - 1 < 0 || xcheck - 1< 0)
+		return (TRUE);
+	if (is_facing_right(p->rotation_angle) && is_facing_up(p->rotation_angle) 
+		&& map[ycheck][xcheck - 1] == '1' &&  map[ycheck + 1][xcheck] == '1')
+		return (TRUE);
+	if (is_facing_right(p->rotation_angle) && !is_facing_up(p->rotation_angle)
+		&& map[ycheck - 1][xcheck] == '1' && map[ycheck][xcheck - 1] == '1')
+		return (TRUE);
+	if (!is_facing_right(p->rotation_angle) && is_facing_up(p->rotation_angle)
+		&& map[ycheck + 1][xcheck] == '1' &&  map[ycheck][xcheck + 1] == '1' )
+		return (TRUE);
+	if (!is_facing_right(p->rotation_angle) && !is_facing_up(p->rotation_angle)
+		&& map[ycheck - 1][xcheck] == '1' &&  map[ycheck][xcheck + 1] == '1' )
 		return (TRUE);
 	return (FALSE);
 }

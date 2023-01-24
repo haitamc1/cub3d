@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:23:39 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/24 16:26:14 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 17:50:10 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	draw_ray(t_ply *p)
 	t_ray	ray;
 
 	ray.origin = set_point(p->x + p->player_size / 2, p->y + p->player_size / 2);
-	set_wall_hit_point(p->map, &ray, p->rotation_angle);
+	set_wall_hit_point(p, &ray, p->rotation_angle);
 	if (is_facing_right(p->rotation_angle))
 		printf("facing right\n");
 	else

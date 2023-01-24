@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/24 16:09:38 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 17:45:50 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,12 +200,12 @@ t_lineq	cal_alpha(t_point a, t_point b);
 void	draw_rays(t_ply *p);
 void	draw_ray(t_ply *p);
 t_point	set_point(int x, int y);
-t_bool	has_wall(char **map, double x, double y);
+t_bool	has_wall(t_ply *p, double x, double y);
 
-t_point	get_vertical_wall_hit_point(char **map, t_point a, double angle);
-t_point	get_horizontal_wall_hit_point(char **map, t_point a, double angle);
+t_point	get_vertical_wall_hit_point(t_ply *p, t_point a, double angle);
+t_point	get_horizontal_wall_hit_point(t_ply *p, t_point a, double angle);
 double	get_distance(t_point a, t_point b);
-void	set_wall_hit_point(char **map, t_ray *ray, double angle);
+void	set_wall_hit_point(t_ply *p, t_ray *ray, double angle);
 double	normalize_angle(double angle);
 void	init_rays(t_ply *p, t_ray *ray);
 void	render_ray(t_ply *p, t_ray ray);

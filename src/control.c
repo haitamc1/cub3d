@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:48:26 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/23 20:18:12 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 17:44:10 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	move_player(t_ply *p, int key)
 			p->walk_direction = -1;
 		new_y = sin(p->rotation_angle) * p->step * p->walk_direction;
 		new_x = cos(p->rotation_angle) * p->step * p->walk_direction;
-		if (has_wall(p->map, p->x + new_x, p->y + new_y))
+		if (has_wall(p, p->x + new_x, p->y + new_y))
 			return ;
 		p->x += new_x;
 		p->y += new_y;
@@ -59,7 +59,7 @@ void	move_player(t_ply *p, int key)
 			p->walk_direction = -1;
 		new_y = sin(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
 		new_x = cos(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
-		if (has_wall(p->map, p->x + new_x, p->y + new_y))
+		if (has_wall(p, p->x + new_x, p->y + new_y))
 			return ;
 		p->y += new_y;
 		p->x += new_x;

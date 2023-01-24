@@ -15,7 +15,6 @@ int	main(int ac, char **av)
 		check_map(&p, get_map(av[1]));
 		load_textures(&p);
 		print_map(p.map);
-		draw_map(&p);
 		// draw_line(&p, set_point(100, 100), set_point(300, 300));
 		// draw_line(&p, set_point(300, 100), set_point(100, 300));
 		mlx_put_image_to_window(p.mlx, p.win, p.img, 0, 0);
