@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:42:10 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/23 20:12:38 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 14:32:00 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ void	init_rays(t_ply *p, t_ray *ray)
 	while (i < NUM_RAYS)
 	{
 		ray[i].id = i;
-		//printf("angle for %d is {%.2f}\n", i, angle);
 		angle = normalize_angle(angle);
 		ray[i].angle = angle;
 		ray[i].origin = p_pos;
 		set_wall_hit_point(p->map, &ray[i], angle);
-		//printf("hit point for  %d y[%.2f]x[%.2f]\n", i, ray[i].hit_wall.y, ray[i].hit_wall.x);
 		ray[i].distance = get_distance(p_pos, ray[i].hit_wall);
+		ray[i].distance *= cos(ray[i].angle - p->rotation_angle);
 		angle += angle_increment;
 		i++;
 	}

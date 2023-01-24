@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:43:42 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/23 21:26:04 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 16:05:05 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,13 @@ void	set_wall_hit_point(char **map, t_ray *ray, double angle)
 	{
 		ray->hit_wall = horizontal_hit_point;
 		ray->hit_type = HORZ;
-		ray->texture =  (int) horizontal_hit_point.x % TILE_SIZE;
+		ray->x_txt =  (int) horizontal_hit_point.x % TILE_SIZE;
 	}
 	else
 	{
 		ray->hit_wall = vertical_hit_point;
 		ray->hit_type = VERT;
-		ray->texture = (int) vertical_hit_point.y % TILE_SIZE;
+		ray->x_txt = (int) vertical_hit_point.y % TILE_SIZE;
 	}
 	//printf("wall hit at y[%d]x[%d]\n", (int) (ray->hit_wall.y / TILE_SIZE), \
 	(int) (ray->hit_wall.x / TILE_SIZE));

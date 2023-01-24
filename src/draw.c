@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/24 16:23:39 by arouzen           #+#    #+#             */
+/*   Updated: 2023/01/24 16:26:14 by arouzen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 void	draw_map(t_ply *p)
@@ -85,38 +97,20 @@ void	draw_wall_strip(t_ply *p, t_ray ray, int x)
 	double	wall_height;
 	double	distance_from_top;
 	double	plane_distance;
-	double	distance;
-	void	*wall_texture;
-	double	j;
+	double	y;
 
-	distance = ray.distance * cos(ray.angle - p->rotation_angle);
 	plane_distance = (WIDTH / 2) / tan(FOV / 2);
-	wall_height = TILE_SIZE / distance * plane_distance;
+	wall_height = TILE_SIZE / ray.distance * plane_distance;
 	y_top = (WIDTH / 2) - (wall_height / 2);
 	if (y_top < 0)
 		y_top = 0;
 	y_bottom = (WIDTH / 2) + (wall_height / 2);
 	if (y_bottom >= HEIGHT)
 		y_bottom = HEIGHT - 1;
-	//printf("y_top[%.0f] -- y_bottom[%.0f] && wall height is %.0f\n", y_top, y_bottom, wall_height);
 	draw_ceiling(p, x, y_top);
-	j = y_top;
-	while (j < y_bottom)
-	{
-		distance_from_top = j + wall_height / 2 - WIDTH / 2;
-		//printf("y[%.1f]and x[%.d]\n", j, x);
-		//printf("texture y[%d]and x[%d]\n", (int)((j - y_top) * TILE_SIZE / wall_height), ray.texture);
-		if (ray.hit_type == HORZ)
-			//my_mlx_pixel_put(p, x, j, 0xc3b091);
-			my_mlx_pixel_put(p, x, j, \
-			get_mlx_pixel_color(p, p->txt.no_txtr, ray.texture, distance_from_top * TILE_SIZE / wall_height));
-		else
-			//my_mlx_pixel_put(p, x, j, 0xefe7ce);
-			my_mlx_pixel_put(p, x, j, \
-			get_mlx_pixel_color(p, p->txt.so_txtr, ray.texture, distance_from_top * TILE_SIZE / wall_height));
-		///printf("drawing pixel %.0f\n", j);
-		j++;
-	}
+	y = y_top;
+	while (y < y_bottom)
+		draw_pxl(p, &ray, x, y++);
 	draw_floor(p, x, y_bottom);
 }
 
@@ -171,4 +165,27 @@ void	draw_floor(t_ply *p, int x, int y_start)
 		my_mlx_pixel_put(p, x, j, p->txt.floor_clr);
 		j++;
 	}
+}
+
+void	draw_pxl(t_ply *p, t_ray *ray, int x, double y)
+{
+	int		color;
+	double	distance_from_top;
+	double	wall_height;
+	int		y_color;
+
+	wall_height = (TILE_SIZE / ray->distance) * (WIDTH / 2) / tan(FOV / 2);
+	distance_from_top = y + wall_height / 2 - WIDTH / 2;
+	y_color = distance_from_top * TILE_SIZE / wall_height;
+	if (ray->hit_type == HORZ && is_facing_up(ray->angle))
+		color = get_mlx_pixel_color(p, p->txt.no_txtr, ray->x_txt, y_color);
+	else if (ray->hit_type == HORZ && is_facing_up(ray->angle) == FALSE)
+		color = get_mlx_pixel_color(p, p->txt.so_txtr, ray->x_txt, y_color);
+	else if (ray->hit_type == VERT && is_facing_right(ray->angle))
+		color = get_mlx_pixel_color(p, p->txt.ea_txtr, ray->x_txt, y_color);
+	else if (ray->hit_type == VERT && is_facing_right(ray->angle) == FALSE)
+		color = get_mlx_pixel_color(p, p->txt.we_txtr, ray->x_txt, y_color);
+	else
+		return ;
+	my_mlx_pixel_put(p, x, y, color);
 }

@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 12:44:09 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/23 19:06:03 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 16:12:40 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*get_txtr(t_ply *p, char *file)
 	int		len;
 	int		width;
 	int		height;
-	char	*adr;
+	char	*addr;
 	void	*img;
 
 	img = mlx_xpm_file_to_image(p->mlx, file, &width, &height);
@@ -61,6 +61,8 @@ char	*get_txtr(t_ply *p, char *file)
 		exit_msg("Importing texture error\n");
 	if (width != TILE_SIZE || height != TILE_SIZE)
 		exit_msg("Texture lenght and height should match TILE_SIZE\n ");
-	adr = mlx_get_data_addr(img, &p->txt.bpp, &p->txt.len, &p->endian);
-	return (adr);
+	addr = mlx_get_data_addr(img, &p->txt.bpp, &p->txt.len, &p->endian);
+	if (addr == NULL)
+		exit_msg("Importing texture error\n ");
+	return (addr);
 }

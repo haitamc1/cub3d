@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/24 14:13:33 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 14:20:14 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,10 @@ int	get_clr(char *clr)
 
 	i = 0;
 	data = ft_split(clr, ',');
-	// if (!data)
-	// 	exit_msg("ERROR GETTING COLOR\n");
-	if (ft_chardp_len(data) < 3) // && data[3][0] != '\n')
+	if (ft_chardp_len(data) < 3)
 		exit_msg("INVALID COLOR\n");
 	while (i < 3)
 	{
-		// if (data[i][j] && data[i][j] != '\n')
-		// 	exit_msg("INVALID COLOR\n");
-		// if (ft_isnum(data[i]) == FALSE)
-		// 	exit_msg("INVALID COLOR NUMBER\n");
 		rgb[i] = ft_atoi(data[i]);
 		if (rgb[i] > 255 || rgb[i] < 0)
 			exit_msg("COLOR OUT OF RGB RANGE\n");
@@ -50,8 +44,6 @@ char	*get_texture_file(char *s)
 	int		i;
 
 	i = 0;
-	// while (is_space(s[i]))
-	// 	i++;
 	if (!s[i] && s[i] != '\n')
 		exit_msg("NO PATH WAS FOUND TO LOAD DATA FROM\n");
 	begin = i;
@@ -63,22 +55,6 @@ char	*get_texture_file(char *s)
 		exit_msg("ERROR ALLOCATING MEMORY\n");
 	return (path);
 }
-
-// int	map_start(char *s)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (s[i])
-// 	{
-// 		if (s[i] == '0' || s[i] == '1')
-// 		{
-// 			if (s[i] == '0')
-// 				return (1);
-// 		}
-// 		return (0);	
-// 	}
-// }
 
 bool	filled_texture_check(t_texture *s)
 {
@@ -126,7 +102,7 @@ void	get_texture(char *data, t_texture *check)
 {
 	char	**tmp;
 
-	tmp = ft_split(data, ' '); //what if tabs?
+	tmp = ft_split(data, ' ');
 	if (ft_chardp_len(tmp) != 2)
 		exit_msg("ERROR GETTING TEXTURE\n");
 	check_resource(tmp[0], tmp[1], check);

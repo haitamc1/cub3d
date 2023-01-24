@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/24 14:10:28 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 16:09:38 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ typedef struct s_ray
 	t_point		hit_wall;
 	e_hit_type	hit_type;
 	double		distance;
-	int			texture;
+	int			x_txt;
 }				t_ray;
 
 
@@ -223,6 +223,7 @@ char	*get_txtr(t_ply *p, char *file);
 void	load_textures(t_ply *p);
 void	set_player_pos(t_ply *p, int x, int y);
 void	set_player_angle(t_ply *p, char c);
+void	draw_pxl(t_ply *p, t_ray *ray, int x, double y);
 
 
 # define FOV (60 * PI / 180)
