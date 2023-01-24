@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:07:31 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/23 21:12:47 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 14:14:01 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,29 @@ char **parse_resources(t_ply *p, char **map)
 	return (&map[i]);
 }
 
-int	parse_map(char **map)
+int	parse_map(t_ply	*p)
 {
 	int	x;
 
 	x = 0;
-	while (map[x])
+	while (p->map[x])
 	{
-		parse_line(map, x);
-		//printf("%s\n", map[x]);
+		parse_line(p, x);
 		x++;
-		//break ;
-
 	}
 	return (1);
 }
 
-void	parse_line(char **map, int x)
+void	parse_line(t_ply *p, int x)
 {
 	int			y;
 	static int	ply_pos = 0;
+	char		**map;
 
 	y = 0;
+	map = p->map;
 	while (map[x][y])
 	{
-		//printf("%c", map[x][y]);
 		if (is_valid_token(map[x][y]) == FALSE)
 		{
 			exit_msg("INVALID TOKEN IN MAP\n");
@@ -62,11 +60,10 @@ void	parse_line(char **map, int x)
 			check_space(map, x, y);
 		else if (map[x][y] == '0')
 			check_zero(map, x, y);
-		// if (map[x][y] == '0');
-		// 	check_space(map, x, y);
 		else if (is_player_pos(map[x][y]))
 		{
-			//check_player(map, x, y);
+			set_player_pos(p, x, y);
+			set_player_angle(p, map[x][y]);
 			ply_pos += is_player_pos(map[x][y]);
 		}
 		y++;
@@ -75,22 +72,36 @@ void	parse_line(char **map, int x)
 		exit_msg("Player error\n");
 }
 
+void	set_player_pos(t_ply *p, int x, int y)
+{
+	p->x = y * TILE_SIZE;
+	p->y = x * TILE_SIZE;
+}
+
+void	set_player_angle(t_ply *p, char c)
+{
+	if (c == 'N')
+		p->rotation_angle = (PI / 180) * 270;
+	else if (c == 'S')
+		p->rotation_angle = (PI / 180) * 90;
+	else if (c == 'E')
+		p->rotation_angle = (PI / 180) * 0;
+	else if (c == 'W')
+		p->rotation_angle = (PI / 180) * 180;
+}
+
 void	check_space(char **map, int x, int y)
 {
 	// printf("Check space [%d][%d]\n", x, y);
 	// printf("map [%s]\n", map[x - 1]);
 	if (y > 0 && (map[x][y - 1] != ' ' &&  map[x][y - 1] != '1'))
 		(printf("SPACE ERR: 1\n"), exit_msg(&map[x][y]));
-	//	return ;
 	if ((map[x][y + 1] != ' ' &&  map[x][y + 1] != '1'))
 		(printf("SPACE ERR: 2\n"), exit_msg(&map[x][y]));
-	//	return ;
 	if (ft_strlen(map[x - 1]) > y && (map[x - 1][y] != ' ' &&  map[x - 1][y] != '1'))
 		(printf("SPACE ERR: 3\n"), exit_msg(&map[x][y]));
-	//	return ;
 	if (ft_strlen(map[x + 1]) > y && (map[x + 1][y] != ' ' &&  map[x + 1][y] != '1'))
 		(printf("SPACE ERR: 4\n"), exit_msg(&map[x][y]));
-	//	return ;
 	//exit_msg(&map[x][y]);
 }
 

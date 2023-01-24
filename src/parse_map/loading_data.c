@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/23 21:01:28 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 14:13:33 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,31 +141,7 @@ int	skip_space(char *s, int	i)
 
 void	check_map(t_ply *p, char **map)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
 	map = parse_resources(p, map);
-	// printf("|%s|", *map);
-	// printf("|%s|", *(map + 1));
-	parse_map(map);
 	p->map = map;
-	// if (!map[i])
-	// 	exit_msg("INCOMPLETE MAP\n");
-	// while (just_space(map[i]) || map[i][0] == '\n')
-	// 		i++;
-	// j = skip_space(map[i][j], j);
-	// while (map[i][j] && !is_space(map[i][j]) && map[i][j] != '\n')
-	// {
-	// 	if (map[i][j] != '1')
-	// 		exit_msg("MAP ERROR\n");
-	// 	j++;
-	// }
-	// if (map[i][j] &&       map[i][j] != '\n')
-	// 	exit_msg("MAP ERROR\n");
-	// while (map[++i])
-	// {
-		
-	// }
+	parse_map(p);
 }

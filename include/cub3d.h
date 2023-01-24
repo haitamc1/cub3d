@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/23 20:17:08 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 14:10:28 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,8 @@ char		**get_map(char *file);
 bool		is_space(char c);
 void		check_space(char **map, int x, int y);
 void		check_zero(char **map, int x, int y);
-int			parse_map(char **map);
-void		parse_line(char **map, int x);
+int			parse_map(t_ply *p);
+void		parse_line(t_ply *p, int x);
 t_bool		is_valid_token(char c);
 t_bool		is_player_pos(char c);
 bool		filled_texture_check(t_texture *s);
@@ -221,6 +221,9 @@ e_hit_type	get_wall_hit_type(t_point a, double angle);
 int		get_mlx_pixel_color(t_ply *p, char *txt, int x, int y);
 char	*get_txtr(t_ply *p, char *file);
 void	load_textures(t_ply *p);
+void	set_player_pos(t_ply *p, int x, int y);
+void	set_player_angle(t_ply *p, char c);
+
 
 # define FOV (60 * PI / 180)
 # define NUM_RAYS WIDTH

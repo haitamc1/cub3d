@@ -156,7 +156,7 @@ void	draw_ceiling(t_ply *p, int x, int y_end)
 	j = 0;
 	while (j < y_end)
 	{
-		my_mlx_pixel_put(p, x, j, 0x335379);
+		my_mlx_pixel_put(p, x, j, p->txt.ceiling_clr);
 		j++;
 	}
 }
@@ -168,7 +168,7 @@ void	draw_floor(t_ply *p, int x, int y_start)
 	j = y_start;
 	while (j < HEIGHT)
 	{
-		my_mlx_pixel_put(p, x, j, 0xcdcace);
+		my_mlx_pixel_put(p, x, j, p->txt.floor_clr);
 		j++;
 	}
 }
