@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:07:31 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/24 14:14:01 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 20:52:34 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	parse_line(t_ply *p, int x)
 
 void	set_player_pos(t_ply *p, int x, int y)
 {
-	p->x = y * TILE_SIZE;
-	p->y = x * TILE_SIZE;
+	p->x = (y + 1) * TILE_SIZE - TILE_SIZE / 2;
+	p->y = (x + 1) * TILE_SIZE - TILE_SIZE / 2;
 }
 
 void	set_player_angle(t_ply *p, char c)

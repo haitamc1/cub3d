@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:40:16 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/21 12:06:51 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/24 20:59:14 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	line_dda(t_ply *p, t_point a, t_point b)
 		x = x + dx;
 		y = y + dy;
 		i++;
+		if (y < 0 || x < 0 || y >= TILE_SIZE * MAP_COLS || x >= TILE_SIZE * MAP_ROWS)
+			break ;
 		my_mlx_pixel_put(p, x, y, 0xf80011);
 	}
 }

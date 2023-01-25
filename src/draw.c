@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:23:39 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/24 17:50:10 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/25 12:37:13 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_map(t_ply *p)
 	// 	x = 0;
 	// 	while (x < map_x)
 	// 	{
-	// 		if (grid[y / TILE_SIZE][x / TILE_SIZE] == 1)
+	// 		if (p->map[y / TILE_SIZE][x / TILE_SIZE] == '1')
 	// 			draw_rect(p, x, y, TILE_SIZE, 0xFA4FFF);
 	// 		x += TILE_SIZE;
 	// 	}
