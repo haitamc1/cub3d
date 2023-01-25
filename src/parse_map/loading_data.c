@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/24 14:20:14 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:39:22 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ char	**get_map(char *file)
 	int			fd;
 	int			i;
 
+	check_file_extension(file, ".cub");
 	i = 0;
 	fd = cub_fd(file);
 	map = allocate_dp(map_line_count(fd));
@@ -120,4 +121,16 @@ void	check_map(t_ply *p, char **map)
 	map = parse_resources(p, map);
 	p->map = map;
 	parse_map(p);
+}
+
+
+void	check_file_extension(char *file, char *extension)
+{
+	char	*str;
+	// len = ft_strlen(file);
+	// if (len < 5)
+	// 	return (exit_msg("INVALID FILE\n"));
+	str = ft_strnstr(file, extension, ft_strlen(file));
+	if (str == NULL || ft_strlen(str) != ft_strlen(extension))
+		exit_msg("INVALID FILE EXTENTION\n");
 }

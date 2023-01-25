@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/25 12:48:32 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:38:54 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ t_bool		is_valid_token(char c);
 t_bool		is_player_pos(char c);
 bool		filled_texture_check(t_texture *s);
 void		check_player(char **map, int x, int y);
+void		check_file_extension(char *file, char *extension);
 
 
 void	player_direction(t_ply *p);

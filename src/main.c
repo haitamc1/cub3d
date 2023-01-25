@@ -9,7 +9,6 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		//check_file_extension(av[1], ".cub");
 		init_values(&p);
 		init_textures(&p.txt);
 		check_map(&p, get_map(av[1]));
@@ -20,6 +19,7 @@ int	main(int ac, char **av)
 		printf("map len is [%d]\n", ft_parr_len(p.map));
 		// draw_line(&p, set_point(100, 100), set_point(300, 300));
 		// draw_line(&p, set_point(300, 100), set_point(100, 300));
+		draw_map(&p);
 		mlx_put_image_to_window(p.mlx, p.win, p.img, 0, 0);
 		mlx_hook(p.win, 17, 0, &cross, &p);
 		mlx_hook(p.win, 2, 0L, &key, &p);
