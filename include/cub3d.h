@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/25 16:38:54 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/26 13:34:11 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@
 # define ESC 53
 # define RIGHT 124 
 # define LEFT 123
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
+# define LEFT_CLICK 1
+# define RIGHT_CLICK 2
 
 //*************************************************//
 
@@ -226,6 +230,11 @@ void	set_player_pos(t_ply *p, int x, int y);
 void	set_player_angle(t_ply *p, char c);
 void	draw_pxl(t_ply *p, t_ray *ray, int x, double y);
 t_bool	wall_corner_check(t_ply *p, int ycheck, int xcheck);
+void	move_up(t_ply *p);
+void	move_down(t_ply *p);
+void	move_right(t_ply *p);
+void	move_left(t_ply *p);
+int		mouse_hook(int	key, int x, int y, t_ply * p);
 
 
 # define FOV (60 * PI / 180)

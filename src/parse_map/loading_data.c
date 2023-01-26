@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/25 16:39:22 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:17:25 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ char	**get_map(char *file)
 		i++;
 		tmp = get_next_line(fd);
 		map[i] = ft_strtrim(tmp, "\n");
-		//printf("%s\n", map[i]);
 		free(tmp);
 	}
 	map[++i] = NULL;

@@ -21,8 +21,9 @@ int	main(int ac, char **av)
 		// draw_line(&p, set_point(300, 100), set_point(100, 300));
 		draw_map(&p);
 		mlx_put_image_to_window(p.mlx, p.win, p.img, 0, 0);
-		mlx_hook(p.win, 17, 0, &cross, &p);
+		mlx_hook(p.win, 17, 0L, &cross, &p);
 		mlx_hook(p.win, 2, 0L, &key, &p);
+		mlx_mouse_hook(p.win, &mouse_hook, &p);
 		mlx_loop(p.mlx);
 	}
 	else
