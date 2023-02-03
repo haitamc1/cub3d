@@ -66,6 +66,23 @@
 # define HEIGHT (MAP_ROWS * TILE_SIZE)
 # define PI 3.14159265359
 
+typedef struct coordinates
+{
+	double	x;
+	double	y;
+
+}	t_coordinates;
+
+typedef struct intersection_coordinates
+{
+	double	horizontal_x;
+	double	horizontal_y;
+	double	x_step_hoz;
+	double	y_step_hoz;
+	double	x_step_vrt;
+	double	y_step_vrt;
+}	t_intersection;
+
 typedef struct texture
 {
 	char	*no_file;

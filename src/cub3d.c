@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:43:24 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/10 10:56:15 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/10 12:21:52 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,11 +182,11 @@ void	draw_player(t_ply *p)
 
 void	player_direction(t_ply *p)
 {
-	int	ray_count;
+	int		ray_count;
 	double	x;
 	double	y;
+	double	j;
 	int		i;
-	double		j;
 	
 	i = 0;
 	j = 0;
@@ -194,13 +194,14 @@ void	player_direction(t_ply *p)
 	while (j < ray_count)
 	{
 		i = 0;
-		while (!is_there_wall(x = i * cos(p->rotation_angle + deg_to_rad(j)) + p->x, y = i * sin(p->rotation_angle + deg_to_rad(j)) + p->y))
+		while (!is_there_wall(i * cos(p->rotation_angle + deg_to_rad(j)) + p->x, i * sin(p->rotation_angle + deg_to_rad(j)) + p->y))
 		{
 			x = i * cos(p->rotation_angle + deg_to_rad(j)) + p->x;
 			y = i * sin(p->rotation_angle + deg_to_rad(j)) + p->y;
 			my_mlx_pixel_put(p, y, x, 0x0000ff00);
 			i++;
 		}
+		
 		j += 0.1;
 	}
 	i = 0;
@@ -208,7 +209,7 @@ void	player_direction(t_ply *p)
 	while (j < ray_count)
 	{
 		i = 0;
-		while (!is_there_wall(x = i * cos(p->rotation_angle - deg_to_rad(j)) + p->x, y = i * sin(p->rotation_angle - deg_to_rad(j)) + p->y))
+		while (!is_there_wall(i * cos(p->rotation_angle - deg_to_rad(j)) + p->x, i * sin(p->rotation_angle - deg_to_rad(j)) + p->y))
 		{
 			x = i * cos(p->rotation_angle - deg_to_rad(j)) + p->x;
 			y = i * sin(p->rotation_angle - deg_to_rad(j)) + p->y;
@@ -252,6 +253,7 @@ int	main(int ac, char **av)
 {
 	t_ply	p;
 
+	(void)av;
 	if (ac == 2)
 	{
 		// check_file_extension(av[1], ".cub");
