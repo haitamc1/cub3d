@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/13 14:31:21 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/04 02:08:15 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "mlx.h"
+
 # define ESC 53
 
 //*********FOR_CHANGING_THE_FIELD_OF_VIEW**********//
@@ -45,14 +46,16 @@
 # define MAP_COLS 15
 
 # define TILE_SIZE 40
-# define WIDTH 600
-# define HEIGHT 600
+# define WIDTH  MAP_COLS * TILE_SIZE
+# define HEIGHT  MAP_ROWS * TILE_SIZE
 # define PI 3.14159265359
 
 typedef struct coordinates
 {
 	double	x;
 	double	y;
+	double	ray_lenght;
+	bool	vertical_hit;
 
 }	t_coordinates;
 
@@ -62,6 +65,9 @@ typedef struct intersection_coordinates
 	double	horizontal_y;
 	double	x_step_hoz;
 	double	y_step_hoz;
+	
+	double	vertical_x;
+	double	vertical_y;
 	double	x_step_vrt;
 	double	y_step_vrt;
 }	t_intersection;
@@ -101,13 +107,31 @@ typedef struct player
 extern t_texture data;
 
 
-void	init_values(t_ply *p);
-int	is_there_wall(double new_x, double new_y);
 
+void creat_wall(void);
+
+
+void	init_values(t_ply *p);
+int		is_there_wall(double new_x, double new_y);
+
+void	horizontal_intersection(t_ply *p, t_intersection *data, double angle);
+void	vertical_intersection(t_ply *p, t_intersection *data, double angle);
+double	ray_lenght(double ray_x, double ray_y, double player_x, double player_y);
+
+double	normilaze_angle(double	angle);
+
+double	wall_strip_height(double ray_lenght);
+void	draw_wall(t_ply *p, double strip_height, int i);
+
+t_coordinates	distance_to_wall(t_ply *p, double angle);
+
+int	my_view(t_ply *p);
 
 /****************************************
 ----------------- UTILS -----------------
 *****************************************/
+
+void	my_mlx_pixel_put(t_ply *p, int x, int y, int color);
 
 void	exit_msg(char *msg);
 int		arg_len(char **s);
@@ -121,6 +145,8 @@ bool	just_space(char *s);
 void	load_colors(bool *space, int *clr, char *description);
 int		get_rgb_color(int *rgb);
 double	deg_to_rad(double n);
+bool	looking_up(double angle);
+bool	facing_right(double angle);
 
 /*****************************************/
 
