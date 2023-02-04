@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/08 16:22:07 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:17:25 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,10 @@ int	get_clr(char *clr)
 
 	i = 0;
 	data = ft_split(clr, ',');
-	// if (!data)
-	// 	exit_msg("ERROR GETTING COLOR\n");
-	if (ft_chardp_len(data) < 3) // && data[3][0] != '\n')
+	if (ft_chardp_len(data) < 3)
 		exit_msg("INVALID COLOR\n");
 	while (i < 3)
 	{
-		// if (data[i][j] && data[i][j] != '\n')
-		// 	exit_msg("INVALID COLOR\n");
-		// if (ft_isnum(data[i]) == FALSE)
-		// 	exit_msg("INVALID COLOR NUMBER\n");
 		rgb[i] = ft_atoi(data[i]);
 		if (rgb[i] > 255 || rgb[i] < 0)
 			exit_msg("COLOR OUT OF RGB RANGE\n");
@@ -50,8 +44,6 @@ char	*get_texture_file(char *s)
 	int		i;
 
 	i = 0;
-	// while (is_space(s[i]))
-	// 	i++;
 	if (!s[i] && s[i] != '\n')
 		exit_msg("NO PATH WAS FOUND TO LOAD DATA FROM\n");
 	begin = i;
@@ -64,26 +56,10 @@ char	*get_texture_file(char *s)
 	return (path);
 }
 
-// int	map_start(char *s)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (s[i])
-// 	{
-// 		if (s[i] == '0' || s[i] == '1')
-// 		{
-// 			if (s[i] == '0')
-// 				return (1);
-// 		}
-// 		return (0);	
-// 	}
-// }
-
-bool	filled_texture_check(t_texture s)
+bool	filled_texture_check(t_texture *s)
 {
-	if (s.ea_file && s.we_file && s.no_file && s.so_file \
-		&& s.floor_clr != -1 && s.ceiling_clr != -1)
+	if (s->ea_file && s->we_file && s->no_file && s->so_file \
+		&& s->floor_clr != -1 && s->ceiling_clr != -1)
 		return (1);
 	return (0);
 }
@@ -103,6 +79,7 @@ char	**get_map(char *file)
 	int			fd;
 	int			i;
 
+	check_file_extension(file, ".cub");
 	i = 0;
 	fd = cub_fd(file);
 	map = allocate_dp(map_line_count(fd));
@@ -125,7 +102,7 @@ void	get_texture(char *data, t_texture *check)
 {
 	char	**tmp;
 
-	tmp = ft_split(data, ' '); //what if tabs?
+	tmp = ft_split(data, ' ');
 	if (ft_chardp_len(tmp) != 2)
 		exit_msg("ERROR GETTING TEXTURE\n");
 	check_resource(tmp[0], tmp[1], check);
@@ -138,32 +115,21 @@ int	skip_space(char *s, int	i)
 	return (i);
 }
 
-void	check_map(char **map)
+void	check_map(t_ply *p, char **map)
 {
-	int	i;
-	int	j;
+	map = parse_resources(p, map);
+	p->map = map;
+	parse_map(p);
+}
 
-	i = 0;
-	j = 0;
-	map = parse_resources(map);
-	// printf("|%s|", *map);
-	// printf("|%s|", *(map + 1));
-	parse_map(map);
-	// if (!map[i])
-	// 	exit_msg("INCOMPLETE MAP\n");
-	// while (just_space(map[i]) || map[i][0] == '\n')
-	// 		i++;
-	// j = skip_space(map[i][j], j);
-	// while (map[i][j] && !is_space(map[i][j]) && map[i][j] != '\n')
-	// {
-	// 	if (map[i][j] != '1')
-	// 		exit_msg("MAP ERROR\n");
-	// 	j++;
-	// }
-	// if (map[i][j] &&       map[i][j] != '\n')
-	// 	exit_msg("MAP ERROR\n");
-	// while (map[++i])
-	// {
-		
-	// }
+
+void	check_file_extension(char *file, char *extension)
+{
+	char	*str;
+	// len = ft_strlen(file);
+	// if (len < 5)
+	// 	return (exit_msg("INVALID FILE\n"));
+	str = ft_strnstr(file, extension, ft_strlen(file));
+	if (str == NULL || ft_strlen(str) != ft_strlen(extension))
+		exit_msg("INVALID FILE EXTENTION\n");
 }
