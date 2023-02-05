@@ -11,9 +11,9 @@ int	main(int ac, char **av)
 	{
 		init_values(&p);
 		init_textures(&p.txt);
-		check_map(&p, get_map(av[1]));
+		check_map(&p, av[1]);
 		load_textures(&p);
-		//print_map(p.map);
+		print_map(p.map);
 		printf("player y[%d]x[%d]\n", (int)(p.y / TILE_SIZE), (int) (p.x / TILE_SIZE));
 		printf("angle [%.2f]\n", p.rotation_angle);
 		printf("map len is [%d]\n", ft_parr_len(p.map));

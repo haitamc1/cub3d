@@ -72,12 +72,13 @@ bool	valid_map_part(char c)
 	return (0);
 }
 
-char	**get_map(char *file)
+void	get_map(t_ply *p, char *file)
 {
 	char		**map;
 	char		*tmp;
 	int			fd;
 	int			i;
+	int			max_x;
 
 	check_file_extension(file, ".cub");
 	i = 0;
@@ -87,15 +88,20 @@ char	**get_map(char *file)
 	tmp = get_next_line(fd);
 	map[i] = ft_strtrim(tmp, "\n");
 	free (tmp);
+	max_x = 0;
 	while (map[i])
 	{
 		i++;
 		tmp = get_next_line(fd);
 		map[i] = ft_strtrim(tmp, "\n");
 		free(tmp);
+		if (ft_strlen(map[i]) > max_x)
+			max_x = ft_strlen(map[i]);
 	}
 	map[++i] = NULL;
-	return (map);
+	p->x_map = max_x;
+	p->y_map = ft_parr_len(map);
+	p->map = map;
 }
 
 void	get_texture(char *data, t_texture *check)
@@ -115,20 +121,55 @@ int	skip_space(char *s, int	i)
 	return (i);
 }
 
-void	check_map(t_ply *p, char **map)
+void	check_map(t_ply *p, char *map_file)
 {
-	map = parse_resources(p, map);
-	p->map = map;
+	get_map(p, map_file);
+	p->map = parse_resources(p, p->map);
+	get_full_map(p);
 	parse_map(p);
 }
 
+void	get_full_map(t_ply *p)
+{
+	int		y;
+	char 	*tmp;
+	char	**map;
+
+	y = 0;
+	map = p->map;
+	while (map[y])
+	{
+		tmp = map[y];
+		map[y] = fill_space(map[y], p->x_map);
+		free(tmp);
+		y++;
+	}
+}
+
+char	*fill_space(char *line, int size)
+{
+	int		i;
+	int		len;
+	char	*buff;
+
+	i = 0;
+	buff = malloc(sizeof(char) * (size + 1));
+	len = ft_strlen(line);
+	while (i < size)
+	{
+		if (i < len)
+			buff[i] = line[i];
+		else
+			buff[i] = '1';
+		i++;
+	}
+	buff[i] = '\0';
+	return (buff);
+}
 
 void	check_file_extension(char *file, char *extension)
 {
 	char	*str;
-	// len = ft_strlen(file);
-	// if (len < 5)
-	// 	return (exit_msg("INVALID FILE\n"));
 	str = ft_strnstr(file, extension, ft_strlen(file));
 	if (str == NULL || ft_strlen(str) != ft_strlen(extension))
 		exit_msg("INVALID FILE EXTENTION\n");
