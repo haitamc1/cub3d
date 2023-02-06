@@ -126,8 +126,6 @@ typedef struct player
 	int		endian;
 	char	space_type;
 	char	**map;
-	int		x_map;
-	int		y_map;
 	t_texture	txt;
 
 }	t_ply;
@@ -188,10 +186,8 @@ void		init(t_ply *p);
 void		check_file_extension(char *file, char *extension);
 char 		**parse_resources(t_ply *p, char **map);
 void		init_textures(t_texture *data);
-void		check_map(t_ply *p, char *map_file);
-void		get_map(t_ply *p, char *file);
-void		get_full_map(t_ply *p);
-char		*fill_space(char *line, int size);
+void		check_map(t_ply *p, char **map);
+char		**get_map(char *file);
 bool		is_space(char c);
 void		check_space(char **map, int x, int y);
 void		check_zero(char **map, int x, int y);

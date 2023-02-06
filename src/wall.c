@@ -112,6 +112,7 @@ t_bool	has_wall(t_ply *p, double x, double y)
 		return (TRUE);
 	if (ycheck - 1 < 0 || xcheck - 1 < 0)
 		return (TRUE);
+	return (FALSE);
 	return (wall_corner_check(p, ycheck, xcheck));
 }
 
