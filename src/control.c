@@ -79,8 +79,8 @@ int	mouse_hook(int	key, int x, int y, t_ply * p)
 
 void	move_up(t_ply *p)
 {
-	double	offset_x;
-	double	offset_y;
+	int	offset_x;
+	int	offset_y;
 
 	p->walk_direction = 1;
 	offset_y = sin(p->rotation_angle) * p->step * p->walk_direction;
@@ -93,8 +93,8 @@ void	move_up(t_ply *p)
 
 void	move_down(t_ply *p)
 {
-	double	offset_x;
-	double	offset_y;
+	int	offset_x;
+	int	offset_y;
 
 	p->walk_direction = -1;
 	offset_y = sin(p->rotation_angle) * p->step * p->walk_direction;
@@ -107,8 +107,8 @@ void	move_down(t_ply *p)
 
 void	move_right(t_ply *p)
 {
-	double	offset_x;
-	double	offset_y;
+	int	offset_x;
+	int	offset_y;
 
 	p->walk_direction = 1;
 	offset_y = sin(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
@@ -121,8 +121,8 @@ void	move_right(t_ply *p)
 
 void	move_left(t_ply *p)
 {
-	double	offset_x;
-	double	offset_y;
+	int	offset_x;
+	int	offset_y;
 
 	p->walk_direction = -1;
 	offset_y = sin(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
