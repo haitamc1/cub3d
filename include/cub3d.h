@@ -251,8 +251,7 @@ t_lineq	cal_alpha(t_point a, t_point b);
 void	draw_rays(t_ply *p);
 void	draw_ray(t_ply *p);
 t_point	set_point(int x, int y);
-t_bool	has_wall(t_ply *p, double x, double y);
-
+t_bool	has_wall(t_ply *p, double x, double y, t_bool corner_check);
 t_point	get_vertical_wall_hit_point(t_ply *p, t_point a, double angle);
 t_point	get_horizontal_wall_hit_point(t_ply *p, t_point a, double angle);
 double	get_distance(t_point a, t_point b);
@@ -281,6 +280,7 @@ void	move_down(t_ply *p);
 void	move_right(t_ply *p);
 void	move_left(t_ply *p);
 int		mouse_hook(int	key, int x, int y, t_ply * p);
+void	get_map_xy(t_ply *p);
 
 
 # define FOV (60 * PI / 180)

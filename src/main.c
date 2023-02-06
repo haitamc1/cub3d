@@ -16,7 +16,8 @@ int	main(int ac, char **av)
 		print_map(p.map);
 		printf("player y[%d]x[%d]\n", (int)(p.y / TILE_SIZE), (int) (p.x / TILE_SIZE));
 		printf("angle [%.2f]\n", p.rotation_angle);
-		printf("map len is [%d]\n", ft_parr_len(p.map));
+		printf("map[%d][%d]\n", p.y_map, p.x_map);
+		//return 0;
 		// draw_line(&p, set_point(100, 100), set_point(300, 300));
 		// draw_line(&p, set_point(300, 100), set_point(100, 300));
 		draw_map(&p);

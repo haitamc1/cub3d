@@ -22,9 +22,9 @@ void	draw_map(t_ply *p)
 	// int	map_x;
 	// int	map_y;
 
-	// y = 0;
 	// map_x = MAP_ROWS * TILE_SIZE;
 	// map_y = MAP_COLS * TILE_SIZE;
+	// y = 0;
 	// while (y < map_y)
 	// {
 	// 	x = 0;
@@ -40,6 +40,7 @@ void	draw_map(t_ply *p)
 	//draw_ray(p);
 	//draw_playert(p);
 	draw_walls(p, ray);
+	//printf("x = %f| y = %f\n", p->x, p->y);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 }
 

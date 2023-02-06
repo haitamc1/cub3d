@@ -78,7 +78,6 @@ void	get_map(t_ply *p, char *file)
 	char		*tmp;
 	int			fd;
 	int			i;
-	int			max_x;
 
 	check_file_extension(file, ".cub");
 	i = 0;
@@ -88,19 +87,14 @@ void	get_map(t_ply *p, char *file)
 	tmp = get_next_line(fd);
 	map[i] = ft_strtrim(tmp, "\n");
 	free (tmp);
-	max_x = 0;
 	while (map[i])
 	{
 		i++;
 		tmp = get_next_line(fd);
 		map[i] = ft_strtrim(tmp, "\n");
 		free(tmp);
-		if (ft_strlen(map[i]) > max_x)
-			max_x = ft_strlen(map[i]);
 	}
 	map[++i] = NULL;
-	p->x_map = max_x;
-	p->y_map = ft_parr_len(map);
 	p->map = map;
 }
 
@@ -125,8 +119,34 @@ void	check_map(t_ply *p, char *map_file)
 {
 	get_map(p, map_file);
 	p->map = parse_resources(p, p->map);
+	get_map_xy(p);
 	get_full_map(p);
 	parse_map(p);
+}
+
+void	get_map_xy(t_ply *p)
+{
+	int		x;
+	int		y;
+	char 	**map;
+	int		x_max;
+
+	map = p->map;
+	y = 0;
+	x_max = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			x++;
+		}
+		if (x > x_max)
+			x_max = x;
+		y++;
+	}
+	p->x_map = x_max;
+	p->y_map = y - 1;
 }
 
 void	get_full_map(t_ply *p)

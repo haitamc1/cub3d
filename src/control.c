@@ -39,9 +39,6 @@ void	field_of_view(t_ply *p, int key)
 
 void	move_player(t_ply *p, int key)
 {
-	int	new_x;
-	int	new_y;
-
 	reinitialze_img(p);
 	if (key == S)
 		move_down(p);
@@ -82,56 +79,56 @@ int	mouse_hook(int	key, int x, int y, t_ply * p)
 
 void	move_up(t_ply *p)
 {
-	int	new_x;
-	int	new_y;
+	double	offset_x;
+	double	offset_y;
 
 	p->walk_direction = 1;
-	new_y = sin(p->rotation_angle) * p->step * p->walk_direction;
-	new_x = cos(p->rotation_angle) * p->step * p->walk_direction;
-	if (has_wall(p, p->x + new_x, p->y + new_y))
+	offset_y = sin(p->rotation_angle) * p->step * p->walk_direction;
+	offset_x = cos(p->rotation_angle) * p->step * p->walk_direction;
+	if (has_wall(p, p->x + offset_x, p->y + offset_y, TRUE))
 		return ;
-	p->x += new_x;
-	p->y += new_y;
+	p->x += offset_x;
+	p->y += offset_y;
 }
 
 void	move_down(t_ply *p)
 {
-	int	new_x;
-	int	new_y;
+	double	offset_x;
+	double	offset_y;
 
 	p->walk_direction = -1;
-	new_y = sin(p->rotation_angle) * p->step * p->walk_direction;
-	new_x = cos(p->rotation_angle) * p->step * p->walk_direction;
-	if (has_wall(p, p->x + new_x, p->y + new_y))
+	offset_y = sin(p->rotation_angle) * p->step * p->walk_direction;
+	offset_x = cos(p->rotation_angle) * p->step * p->walk_direction;
+	if (has_wall(p, p->x + offset_x, p->y + offset_y, TRUE))
 		return ;
-	p->x += new_x;
-	p->y += new_y;
+	p->x += offset_x;
+	p->y += offset_y;
 }
 
 void	move_right(t_ply *p)
 {
-	int	new_x;
-	int	new_y;
+	double	offset_x;
+	double	offset_y;
 
 	p->walk_direction = 1;
-	new_y = sin(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
-	new_x = cos(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
-	if (has_wall(p, p->x + new_x, p->y + new_y))
+	offset_y = sin(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
+	offset_x = cos(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
+	if (has_wall(p, p->x + offset_x, p->y + offset_y, TRUE))
 		return ;
-	p->x += new_x;
-	p->y += new_y;
+	p->x += offset_x;
+	p->y += offset_y;
 }
 
 void	move_left(t_ply *p)
 {
-	int	new_x;
-	int	new_y;
+	double	offset_x;
+	double	offset_y;
 
 	p->walk_direction = -1;
-	new_y = sin(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
-	new_x = cos(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
-	if (has_wall(p, p->x + new_x, p->y + new_y))
+	offset_y = sin(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
+	offset_x = cos(p->rotation_angle + (90 * PI / 180)) * p->step * p->walk_direction;
+	if (has_wall(p, p->x + offset_x, p->y + offset_y, TRUE))
 		return ;
-	p->x += new_x;
-	p->y += new_y;
+	p->x += offset_x;
+	p->y += offset_y;
 }

@@ -26,7 +26,7 @@ void	init_values(t_ply *p)
 {
 	int		data;
 
-	p->step = 15;
+	p->step = 8;
 	p->tile_size = TILE_SIZE;
 	p->walk_direction = 0;
 	p->turn_direction = 0;
