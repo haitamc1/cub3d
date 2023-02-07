@@ -3,60 +3,134 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:23:39 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/25 12:37:13 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/07 19:29:52 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+
+
+t_point	scale_coordinat_for_minimap(int x_origin, int y_origin, int	x, int y)
+{
+	t_point	new_point;
+
+	new_point.x = x - x_origin;
+	new_point.y = y - y_origin;
+	return (new_point);
+}
+
+t_point	get_new_width_height(int x, int y, int x_limit, int	y_limit)
+{
+	t_point	draw_offset;
+
+	draw_offset.x = TILE_SIZE;
+	draw_offset.y = TILE_SIZE;
+	if (x % TILE_SIZE != 0)
+		draw_offset.x = TILE_SIZE - (x % TILE_SIZE);
+	if (y % TILE_SIZE != 0)
+		draw_offset.y = TILE_SIZE - (y % TILE_SIZE);
+	while (x + draw_offset.x > x_limit)
+		draw_offset.x--;
+	while (y + draw_offset.y > y_limit)
+		draw_offset.y--;
+	return (draw_offset);
+}
+
+void	draw_player(t_ply *p)
+{
+	t_point	offset;
+	t_point	dimension;
+
+	dimension.x = 5;
+	dimension.y = 5;
+	offset.x = p->x - (p->x - 150);
+	offset.y = p->y - (p->y - 150);
+	if (offset.x < 0)
+		offset.x = 0;
+	if (offset.y < 0)
+		offset.y = 0;
+	// printf("\n\nplayer offset x = %d| y = %d\n\n", offset.x, offset.y);
+	draw_rect(p, offset, dimension, 255);
+}
+
 void	draw_map(t_ply *p)
 {
 	t_ray	ray[NUM_RAYS];
+	t_point	draw_offset;
+	t_point	new_point;
 
+	// draw_playert(p);
 	init_rays(p, ray);
-	// int	x;
-	// int	y;
-	// int	map_x;
-	// int	map_y;
-
-	// y = 0;
-	// map_x = MAP_ROWS * TILE_SIZE;
-	// map_y = MAP_COLS * TILE_SIZE;
-	// while (y < map_y)
-	// {
-	// 	x = 0;
-	// 	while (x < map_x)
-	// 	{
-	// 		if (p->map[y / TILE_SIZE][x / TILE_SIZE] == '1')
-	// 			draw_rect(p, x, y, TILE_SIZE, 0xFA4FFF);
-	// 		x += TILE_SIZE;
-	// 	}
-	// 	y += TILE_SIZE;
-	// }
-	// render_ray_all(p);
-	//draw_ray(p);
-	//draw_playert(p);
 	draw_walls(p, ray);
+	int	x;
+	int	y;
+	int	map_x;
+	int	map_y;
+
+	y = p->y - 150;
+	if (y < 0)
+		y = 0; 
+	// y = 0;
+	map_x = p->x + 150;
+	// if (map_x > WIDTH)
+	// 	map_x = WIDTH;
+	map_y = p->y + 150;
+	// if (map_y > HEIGHT)
+	// 	map_y = HEIGHT;
+	while (y < map_y)
+	{
+		x = p->x - 150;
+		if (x < 0)
+			x = 0;
+		// x = 0;
+		while (x < map_x)
+		{
+			draw_offset = get_new_width_height(x, y, map_x, map_y);
+			new_point = scale_coordinat_for_minimap(p->x - 150, p->y - 150, x, y);
+			if (p->map[y / TILE_SIZE][x / TILE_SIZE] == '1')
+			{
+				
+				if (x >= 0 && x <= WIDTH && y >= 0 && y <= HEIGHT)
+					draw_rect(p, new_point, draw_offset, 0xFA4FFF);
+			}
+			else
+				draw_rect(p, new_point, draw_offset, 0xffe4b5);
+			if (draw_offset.x != TILE_SIZE)
+				x += draw_offset.x;
+			else
+				x += TILE_SIZE;
+		}
+		if (draw_offset.y != TILE_SIZE)
+			y += draw_offset.y;
+		else
+			y += TILE_SIZE;
+	}
+	draw_player(p);
+	// render_ray_all(p);
+	// draw_ray(p);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 }
 
-void	draw_rect(t_ply *p, int x, int y, int len, int color)
+void	draw_rect(t_ply *p, t_point origin, t_point limit, int color)
 {
 	int	i;
 	int	j;
 
 	j = 0;
-	while (j < len)
+	while (j < limit.y -1)
 	{
 		i = 0;
-		while (i < len)
+		while (i < limit.x-1)
 		{
-			my_mlx_pixel_put(p, x + i, y + j, color);
+			my_mlx_pixel_put(p, origin.x + i, origin.y + j, color);
 			i++;
 		}
+		// if (i == len -1 && j == len -1)
+		// 	my_mlx_pixel_put(p, x + i, y + j, 0xffffffff);
 		j++;
 	}
 }

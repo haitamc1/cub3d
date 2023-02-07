@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/04 19:34:49 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/07 17:17:44 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,8 @@ typedef struct s_ray
 }				t_ray;
 
 
-void	draw_rect(t_ply *p, int x, int y, int len, int color);
+void	draw_rect(t_ply *p, t_point origin, t_point limit, int color);
+
 void	draw_map(t_ply *p);
 void	draw_playert(t_ply *p);
 void	draw_line(t_ply *p, t_point a, t_point b);

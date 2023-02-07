@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:40:16 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/24 20:59:14 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:21:44 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void	line_dda(t_ply *p, t_point a, t_point b)
 		i++;
 		if (y < 0 || x < 0 || y >= TILE_SIZE * MAP_COLS || x >= TILE_SIZE * MAP_ROWS)
 			break ;
-		my_mlx_pixel_put(p, x, y, 0xf80011);
+		// if ((x <= p->x + 50 && y <= p->y + 50) && (x >= p->x - 50 && y >= p->y - 50))
+			my_mlx_pixel_put(p, x, y, 0xf80011);
 	}
 }
 
