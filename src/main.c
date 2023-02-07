@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:29:11 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/07 19:44:52 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/07 19:29:12 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 	{
 		init_values(&p);
 		init_textures(&p.txt);
-		check_map(&p, get_map(av[1]));
+		check_map(&p, av[1]);
 		load_textures(&p);
 		print_map(p.map);
 		draw_map(&p);

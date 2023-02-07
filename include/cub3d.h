@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/07 19:47:08 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/07 19:50:57 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,8 +184,10 @@ void		init(t_ply *p);
 void		check_file_extension(char *file, char *extension);
 char 		**parse_resources(t_ply *p, char **map);
 void		init_textures(t_texture *data);
-void		check_map(t_ply *p, char **map);
-char		**get_map(char *file);
+void		check_map(t_ply *p, char *map_file);
+void		get_map(t_ply *p, char *file);
+void		get_full_map(t_ply *p);
+char		*fill_space(char *line, int size);
 bool		is_space(char c);
 void		check_space(char **map, int x, int y);
 void		check_zero(char **map, int x, int y);
@@ -196,7 +198,6 @@ t_bool		is_player_pos(char c);
 bool		filled_texture_check(t_texture *s);
 void		check_player(char **map, int x, int y);
 void		check_file_extension(char *file, char *extension);
-char		*fill_space(char *line, int size);
 
 
 void	player_direction(t_ply *p);

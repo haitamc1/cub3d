@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loading_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/07 19:44:24 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:17:25 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	valid_map_part(char c)
 	return (0);
 }
 
-char	**get_map(char *file)
+void	get_map(t_ply *p, char *file)
 {
 	char		**map;
 	char		*tmp;
@@ -117,7 +117,7 @@ int	skip_space(char *s, int	i)
 	return (i);
 }
 
-void	check_map(t_ply *p, char **map)
+void	check_map(t_ply *p, char *map_file)
 {
 	get_map(p, map_file);
 	p->map = parse_resources(p, p->map_raw);
@@ -192,9 +192,6 @@ char	*fill_space(char *line, int size)
 void	check_file_extension(char *file, char *extension)
 {
 	char	*str;
-	// len = ft_strlen(file);
-	// if (len < 5)
-	// 	return (exit_msg("INVALID FILE\n"));
 	str = ft_strnstr(file, extension, ft_strlen(file));
 	if (str == NULL || ft_strlen(str) != ft_strlen(extension))
 		exit_msg("INVALID FILE EXTENTION\n");

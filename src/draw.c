@@ -6,13 +6,11 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:23:39 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/07 19:44:12 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/07 21:11:22 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-
 
 t_point	scale_coordinat_for_minimap(int x_origin, int y_origin, int	x, int y)
 {
@@ -53,65 +51,74 @@ void	draw_player(t_ply *p)
 		offset.x = 0;
 	if (offset.y < 0)
 		offset.y = 0;
-	// printf("\n\nplayer offset x = %d| y = %d\n\n", offset.x, offset.y);
 	draw_rect(p, offset, dimension, 255);
+}
+
+int	correct_value_i(int init, int failure)
+{
+	int	r;
+
+	r = init;
+	if (r < failure)
+		r = failure;
+	return (r);
+}
+
+int	correct_value_s(int init, int failure)
+{
+	int	r;
+
+	r = init;
+	if (r > failure)
+		r = failure;
+	return (r);
+}
+
+int	correct_incrementation(int v1, int v2)
+{
+	if (v1 != v2)
+		return (v1);
+	return (v2);
+}
+
+void	minimap(t_ply *p, t_point point, t_point limits)
+{
+	t_point	draw_offset;
+	t_point	new_point;
+
+	while (point.y < limits.y)
+	{
+		point.x = correct_value_i(p->x - 150, 0);
+		while (point.x < limits.x)
+		{
+			draw_offset = get_new_width_height(point.x, point.y, limits.x, limits.y);
+			new_point = scale_coordinat_for_minimap(p->x - 150, p->y - 150, point.x, point.y);
+			if (p->map[(int )point.y / TILE_SIZE][(int )point.x / TILE_SIZE] == '1')
+			{
+				if (point.x >= 0 && point.x <= p->x_map * TILE_SIZE && point.y >= 0 && point.y <= p->y_map * TILE_SIZE)
+					draw_rect(p, new_point, draw_offset, 0xFA4FFF);
+			}
+			else
+				draw_rect(p, new_point, draw_offset, 0xffe4b5);
+			point.x += correct_incrementation(draw_offset.x, TILE_SIZE);
+		}
+		point.y += correct_incrementation(draw_offset.y, TILE_SIZE);
+	}
 }
 
 void	draw_map(t_ply *p)
 {
 	t_ray	ray[NUM_RAYS];
-	t_point	draw_offset;
-	t_point	new_point;
+	t_point	point;
+	t_point	limits;
 
-	// draw_playert(p);
 	init_rays(p, ray);
 	draw_walls(p, ray);
-	int	x;
-	int	y;
-	int	map_x;
-	int	map_y;
-
-	y = p->y - 150;
-	if (y < 0)
-		y = 0; 
-	// y = 0;
-	map_x = p->x + 150;
-	// if (map_x > WIDTH)
-	// 	map_x = WIDTH;
-	map_y = p->y + 150;
-	// if (map_y > HEIGHT)
-	// 	map_y = HEIGHT;
-	while (y < map_y)
-	{
-		x = p->x - 150;
-		if (x < 0)
-			x = 0;
-		// x = 0;
-		while (x < map_x)
-		{
-			draw_offset = get_new_width_height(x, y, map_x, map_y);
-			new_point = scale_coordinat_for_minimap(p->x - 150, p->y - 150, x, y);
-			if (p->map[y / TILE_SIZE][x / TILE_SIZE] == '1')
-			{
-				
-				if (x >= 0 && x <= WIDTH && y >= 0 && y <= HEIGHT)
-					draw_rect(p, new_point, draw_offset, 0xFA4FFF);
-			}
-			else
-				draw_rect(p, new_point, draw_offset, 0xffe4b5);
-			if (draw_offset.x != TILE_SIZE)
-				x += draw_offset.x;
-			else
-				x += TILE_SIZE;
-		}
-		if (draw_offset.y != TILE_SIZE)
-			y += draw_offset.y;
-		else
-			y += TILE_SIZE;
-	}
+	point.y = correct_value_i(p->y - 150, 0);
+	limits.x = correct_value_s(p->x + 150, p->x_map * TILE_SIZE);
+	limits.y = correct_value_s(p->y + 150, p->y_map * TILE_SIZE);
+	minimap(p, point, limits);
 	draw_player(p);
-	// render_ray_all(p);
-	// draw_ray(p);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 }
 
@@ -121,16 +128,14 @@ void	draw_rect(t_ply *p, t_point origin, t_point limit, int color)
 	int	j;
 
 	j = 0;
-	while (j < limit.y -1)
+	while (j < limit.y - 1)
 	{
 		i = 0;
-		while (i < limit.x-1)
+		while (i < limit.x - 1)
 		{
 			my_mlx_pixel_put(p, origin.x + i, origin.y + j, color);
 			i++;
 		}
-		// if (i == len -1 && j == len -1)
-		// 	my_mlx_pixel_put(p, x + i, y + j, 0xffffffff);
 		j++;
 	}
 }
