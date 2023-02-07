@@ -6,13 +6,13 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:07:31 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/24 20:52:34 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/07 20:24:53 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-char **parse_resources(t_ply *p, char **map)
+char	**parse_resources(t_ply *p, char **map)
 {
 	int			i;
 
@@ -31,48 +31,6 @@ char **parse_resources(t_ply *p, char **map)
 	return (&map[i]);
 }
 
-int	parse_map(t_ply	*p)
-{
-	int	x;
-
-	x = 0;
-	while (p->map[x])
-	{
-		parse_line(p, x);
-		x++;
-	}
-	return (1);
-}
-
-void	parse_line(t_ply *p, int x)
-{
-	int			y;
-	static int	ply_pos = 0;
-	char		**map;
-
-	y = 0;
-	map = p->map;
-	while (map[x][y])
-	{
-		if (is_valid_token(map[x][y]) == FALSE)
-		{
-			exit_msg("INVALID TOKEN IN MAP\n");
-		}
-		if (map[x][y] == ' ')
-			check_space(map, x, y);
-		else if (map[x][y] == '0')
-			check_zero(map, x, y);
-		else if (is_player_pos(map[x][y]))
-		{
-			set_player_pos(p, x, y);
-			set_player_angle(p, map[x][y]);
-			ply_pos += is_player_pos(map[x][y]);
-		}
-		y++;
-	}
-	if (map[x + 1] == NULL && ply_pos != 1)
-		exit_msg("Player error\n");
-}
 
 void	set_player_pos(t_ply *p, int x, int y)
 {
@@ -91,31 +49,3 @@ void	set_player_angle(t_ply *p, char c)
 	else if (c == 'W')
 		p->rotation_angle = (PI / 180) * 180;
 }
-
-void	check_space(char **map, int x, int y)
-{
-	// printf("Check space [%d][%d]\n", x, y);
-	// printf("map [%s]\n", map[x - 1]);
-	if (y > 0 && (map[x][y - 1] != ' ' &&  map[x][y - 1] != '1'))
-		(printf("SPACE ERR: 1\n"), exit_msg(&map[x][y]));
-	if ((map[x][y + 1] != ' ' &&  map[x][y + 1] != '1'))
-		(printf("SPACE ERR: 2\n"), exit_msg(&map[x][y]));
-	if (ft_strlen(map[x - 1]) > y && (map[x - 1][y] != ' ' &&  map[x - 1][y] != '1'))
-		(printf("SPACE ERR: 3\n"), exit_msg(&map[x][y]));
-	if (ft_strlen(map[x + 1]) > y && (map[x + 1][y] != ' ' &&  map[x + 1][y] != '1'))
-		(printf("SPACE ERR: 4\n"), exit_msg(&map[x][y]));
-	//exit_msg(&map[x][y]);
-}
-
-void	check_zero(char **map, int x, int y)
-{
-	if (y < 1)
-		exit_msg("MAP ZERO\n");
-	else if (map[x][y + 1] == '\0')
-		exit_msg("MAP ZERO\n");
-	else if (ft_strlen(map[x - 1]) <= y)
-		exit_msg("MAP ZERO\n");
-	else if (ft_strlen(map[x + 1]) <= y)
-		exit_msg("MAP ZERO\n");
-}
-
