@@ -14,7 +14,7 @@ M_SRC_DRAW_DIR = src/draw/
 
 FALGS = -Wall -Wextra -fsanitize=address -g#-Werror #
 
-M_SRC_PARSE_NAME = utils utils1 utils2 loading_data parse_resource #ft_split ft_atoi  ft_isdigit
+M_SRC_PARSE_NAME = utils utils1 utils2 loading_data parse_resource parse_map #ft_split ft_atoi  ft_isdigit
 
 M_SRC_DRAW_NAME = 
 
