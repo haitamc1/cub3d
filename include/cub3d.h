@@ -126,6 +126,7 @@ typedef struct player
 	int		endian;
 	char	space_type;
 	char	**map;
+	char	**map_raw;
 	int		x_map;
 	int		y_map;
 	t_texture	txt;

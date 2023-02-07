@@ -29,6 +29,7 @@ int	get_clr(char *clr)
 			exit_msg("COLOR OUT OF RGB RANGE\n");
 		i++;
 	}
+	ft_freesplit(data);
 	return (get_rgb_color(rgb));
 }
 
@@ -95,7 +96,7 @@ void	get_map(t_ply *p, char *file)
 		free(tmp);
 	}
 	map[++i] = NULL;
-	p->map = map;
+	p->map_raw = map;
 }
 
 void	get_texture(char *data, t_texture *check)
@@ -106,6 +107,7 @@ void	get_texture(char *data, t_texture *check)
 	if (ft_chardp_len(tmp) != 2)
 		exit_msg("ERROR GETTING TEXTURE\n");
 	check_resource(tmp[0], tmp[1], check);
+	ft_freesplit(tmp);
 }
 
 int	skip_space(char *s, int	i)
@@ -118,7 +120,7 @@ int	skip_space(char *s, int	i)
 void	check_map(t_ply *p, char *map_file)
 {
 	get_map(p, map_file);
-	p->map = parse_resources(p, p->map);
+	p->map = parse_resources(p, p->map_raw);
 	get_map_xy(p);
 	get_full_map(p);
 	parse_map(p);
