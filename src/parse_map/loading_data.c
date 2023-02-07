@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loading_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:38 by hchahid           #+#    #+#             */
-/*   Updated: 2023/01/25 17:17:25 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/07 19:44:24 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	get_clr(char *clr)
 			exit_msg("COLOR OUT OF RGB RANGE\n");
 		i++;
 	}
+	ft_freesplit(data);
 	return (get_rgb_color(rgb));
 }
 
@@ -95,7 +96,7 @@ char	**get_map(char *file)
 		free(tmp);
 	}
 	map[++i] = NULL;
-	return (map);
+	p->map_raw = map;
 }
 
 void	get_texture(char *data, t_texture *check)
@@ -106,6 +107,7 @@ void	get_texture(char *data, t_texture *check)
 	if (ft_chardp_len(tmp) != 2)
 		exit_msg("ERROR GETTING TEXTURE\n");
 	check_resource(tmp[0], tmp[1], check);
+	ft_freesplit(tmp);
 }
 
 int	skip_space(char *s, int	i)
@@ -117,11 +119,75 @@ int	skip_space(char *s, int	i)
 
 void	check_map(t_ply *p, char **map)
 {
-	map = parse_resources(p, map);
-	p->map = map;
+	get_map(p, map_file);
+	p->map = parse_resources(p, p->map_raw);
+	get_map_xy(p);
+	get_full_map(p);
 	parse_map(p);
 }
 
+void	get_map_xy(t_ply *p)
+{
+	int		x;
+	int		y;
+	char 	**map;
+	int		x_max;
+
+	map = p->map;
+	y = 0;
+	x_max = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			x++;
+		}
+		if (x > x_max)
+			x_max = x;
+		y++;
+	}
+	p->x_map = x_max;
+	p->y_map = y - 1;
+}
+
+void	get_full_map(t_ply *p)
+{
+	int		y;
+	char 	*tmp;
+	char	**map;
+
+	y = 0;
+	map = p->map;
+	while (map[y])
+	{
+		tmp = map[y];
+		map[y] = fill_space(map[y], p->x_map);
+		free(tmp);
+		y++;
+	}
+}
+
+char	*fill_space(char *line, int size)
+{
+	int		i;
+	int		len;
+	char	*buff;
+
+	i = 0;
+	buff = malloc(sizeof(char) * (size + 1));
+	len = ft_strlen(line);
+	while (i < size)
+	{
+		if (i < len)
+			buff[i] = line[i];
+		else
+			buff[i] = '1';
+		i++;
+	}
+	buff[i] = '\0';
+	return (buff);
+}
 
 void	check_file_extension(char *file, char *extension)
 {

@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:42:10 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/06 14:02:25 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/07 19:45:03 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	render_ray_all(t_ply *p)
 {
 	int		i;
 	t_ray	ray[NUM_RAYS];
-
 
 	init_rays(p, ray);
 	i = 0;

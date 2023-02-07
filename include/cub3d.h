@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/07 17:17:44 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/07 19:47:08 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,36 +27,36 @@
 
 //*********FOR_CHANGING_THE_FIELD_OF_VIEW**********//
 
-#ifdef __linux__ 
+# ifdef __linux__ 
 
-# define ESC 65307
-# define A 97
-# define S 115
-# define D 100
-# define W 119
-# define RIGHT 65363 
-# define LEFT 65361
+#  define ESC 65307
+#  define A 97
+#  define S 115
+#  define D 100
+#  define W 119
+#  define RIGHT 65363 
+#  define LEFT 65361
 
-#else
+# else
 
-# define ESC 53
-# define RIGHT 124 
-# define LEFT 123
-# define SCROLL_UP 4
-# define SCROLL_DOWN 5
-# define LEFT_CLICK 1
-# define RIGHT_CLICK 2
+#  define ESC 53
+#  define RIGHT 124 
+#  define LEFT 123
+#  define SCROLL_UP 4
+#  define SCROLL_DOWN 5
+#  define LEFT_CLICK 1
+#  define RIGHT_CLICK 2
 
 //*************************************************//
 
 //*********FOR_MOVEMENT**********//
 
-# define A 0
-# define S 1
-# define D 2
-# define W 13
+#  define A 0
+#  define S 1
+#  define D 2
+#  define W 13
 
-#endif
+# endif
 //******************************//
 
 # define WALL_CLR 0x00f00ff0
@@ -83,7 +83,6 @@ typedef struct intersection_coordinates
 	double	horizontal_y;
 	double	x_step_hoz;
 	double	y_step_hoz;
-	
 	double	vertical_x;
 	double	vertical_y;
 	double	x_step_vrt;
@@ -126,23 +125,22 @@ typedef struct player
 	int		endian;
 	char	space_type;
 	char	**map;
+	char	**map_raw;
+	int		x_map;
+	int		y_map;
 	t_texture	txt;
 
 }	t_ply;
 
-extern t_texture data;
-
-
-
-void creat_wall(void);
-
+void	creat_wall(void);
 
 void	init_values(t_ply *p);
 int		is_there_wall(double new_x, double new_y);
 
 void	horizontal_intersection(t_ply *p, t_intersection *data, double angle);
 void	vertical_intersection(t_ply *p, t_intersection *data, double angle);
-double	ray_lenght(double ray_x, double ray_y, double player_x, double player_y);
+double	ray_lenght(double ray_x, double ray_y, \
+double player_x, double player_y);
 
 double	normilaze_angle(double	angle);
 
@@ -198,14 +196,16 @@ t_bool		is_player_pos(char c);
 bool		filled_texture_check(t_texture *s);
 void		check_player(char **map, int x, int y);
 void		check_file_extension(char *file, char *extension);
+char		*fill_space(char *line, int size);
 
 
 void	player_direction(t_ply *p);
 void	draw_map(t_ply *p);
 //void	draw_player(t_ply *p);
 
- /* ************************************** TESTS*/
-typedef struct s_point 
+/* ************************************** TESTS*/
+
+typedef struct s_point
 {
 	double	x;
 	double	y;
@@ -238,18 +238,15 @@ typedef struct s_ray
 	int			x_txt;
 }				t_ray;
 
-
 void	draw_rect(t_ply *p, t_point origin, t_point limit, int color);
-
 void	draw_map(t_ply *p);
 void	draw_playert(t_ply *p);
 void	draw_line(t_ply *p, t_point a, t_point b);
 t_lineq	cal_alpha(t_point a, t_point b);
 void	draw_rays(t_ply *p);
 void	draw_ray(t_ply *p);
-t_point	set_point(int x, int y);
-t_bool	has_wall(t_ply *p, double x, double y);
-
+t_point	set_point(double x, double y);
+t_bool	has_wall(t_ply *p, double x, double y, t_bool corner_check);
 t_point	get_vertical_wall_hit_point(t_ply *p, t_point a, double angle);
 t_point	get_horizontal_wall_hit_point(t_ply *p, t_point a, double angle);
 double	get_distance(t_point a, t_point b);
@@ -278,11 +275,20 @@ void	move_down(t_ply *p);
 void	move_right(t_ply *p);
 void	move_left(t_ply *p);
 int		mouse_hook(int	key, int x, int y, t_ply * p);
+void	get_map_xy(t_ply *p);
+t_point	get_horz_intersection_point(t_ply *p, t_point begin, t_point step, \
+double angle);
+t_point	get_vert_intersection_point(t_ply *p, t_point begin, t_point step, \
+double angle);
+
+/*** * * ** DEBUG * * * * * */
+
+void	print_map(char **map);
+void	print_player_info(t_ply *p);
 
 
 # define FOV (60 * PI / 180)
 # define NUM_RAYS WIDTH
 # define RAY_LEN TILE_SIZE * 4
-extern int grid[15][15];
 # define ZOOM 1
-#endif
+#endif // CUB3D_H

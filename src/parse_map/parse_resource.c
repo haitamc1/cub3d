@@ -25,7 +25,9 @@ char **parse_resources(t_ply *p, char **map)
 			get_texture(map[i++], &p->txt);
 	}
 	while (map[i] && (just_space(map[i]) || map[i][0] == '\n'))
+	{
 		i++;
+	}
 	return (&map[i]);
 }
 
