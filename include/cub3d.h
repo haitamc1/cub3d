@@ -6,7 +6,7 @@
 /*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/07 19:50:57 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/07 21:36:24 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,39 @@
 # define WIDTH (MAP_COLS * TILE_SIZE)
 # define HEIGHT (MAP_ROWS * TILE_SIZE)
 # define PI 3.14159265359
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+}				t_point;
+
+typedef struct s_lineq
+{
+	double	alpha;
+	double	beta;
+} 				t_lineq;
+
+typedef enum hit_type
+{
+	HORZ,
+	VERT,
+}			e_hit_type;
+
+typedef struct s_ray
+{
+	int			id;
+	t_point		origin;
+	double		angle;
+	t_bool		is_facing_up;	
+	t_bool		is_facing_down;	
+	t_bool		is_facing_left;	
+	t_bool		is_facing_right;
+	t_point		hit_wall;
+	e_hit_type	hit_type;
+	double		distance;
+	int			x_txt;
+}				t_ray;
 
 typedef struct coordinates
 {
@@ -132,8 +165,6 @@ typedef struct player
 
 }	t_ply;
 
-void	creat_wall(void);
-
 void	init_values(t_ply *p);
 int		is_there_wall(double new_x, double new_y);
 
@@ -149,7 +180,18 @@ void	draw_wall(t_ply *p, double strip_height, int i);
 
 t_coordinates	distance_to_wall(t_ply *p, double angle);
 
-int	my_view(t_ply *p);
+int		my_view(t_ply *p);
+
+/****************************************
+----------------- MINIMAP ----------------
+*****************************************/
+
+int		correct_value_s(int init, int failure);
+int		correct_value_i(int init, int failure);
+void	minimap(t_ply *p, t_point point, t_point limits);
+
+
+
 
 /****************************************
 ----------------- UTILS -----------------
@@ -206,39 +248,7 @@ void	draw_map(t_ply *p);
 
 /* ************************************** TESTS*/
 
-typedef struct s_point
-{
-	double	x;
-	double	y;
-}				t_point;
-
-typedef struct s_lineq
-{
-	double	alpha;
-	double	beta;
-} 				t_lineq;
-
-typedef enum hit_type
-{
-	HORZ,
-	VERT,
-}			e_hit_type;
-
-typedef struct s_ray
-{
-	int			id;
-	t_point		origin;
-	double		angle;
-	t_bool		is_facing_up;	
-	t_bool		is_facing_down;	
-	t_bool		is_facing_left;	
-	t_bool		is_facing_right;
-	t_point		hit_wall;
-	e_hit_type	hit_type;
-	double		distance;
-	int			x_txt;
-}				t_ray;
-
+void	draw_player(t_ply *p);
 void	draw_rect(t_ply *p, t_point origin, t_point limit, int color);
 void	draw_map(t_ply *p);
 void	draw_playert(t_ply *p);

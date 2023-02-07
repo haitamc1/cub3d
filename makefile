@@ -18,7 +18,8 @@ M_SRC_PARSE_NAME = utils utils1 utils2 loading_data parse_resource #ft_split ft_
 
 M_SRC_DRAW_NAME = 
 
-M_SRC_PRIME_NAME = control init_cub3d  main draw line ray  wall move intersection debug
+M_SRC_PRIME_NAME = control init_cub3d  main draw line ray  wall move intersection debug minimap minimap_utils \
+					draw_utils draw_space
 
 BUILD_DIR = build/
 
