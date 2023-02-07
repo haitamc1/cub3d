@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:42:10 by arouzen           #+#    #+#             */
-/*   Updated: 2023/01/24 17:45:11 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/07 17:48:18 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	render_ray_all(t_ply *p)
 {
 	int		i;
 	t_ray	ray[NUM_RAYS];
-
 
 	init_rays(p, ray);
 	i = 0;
