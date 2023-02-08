@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:18:18 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/08 12:26:29 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 12:36:14 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ char	**allocate_dp(int size)
 		exit_msg("ERROR ALLOCATING MEMORY\n");
 	return (dp);
 }
-

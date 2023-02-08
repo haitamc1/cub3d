@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:40:16 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/07 19:44:48 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/08 12:37:24 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	line_dda(t_ply *p, t_point a, t_point b)
 	double	dy;
 	double	x;
 	double	y;
-	int		i;
 	double	step;
 
 	dx = b.x - a.x;
@@ -36,22 +35,22 @@ void	line_dda(t_ply *p, t_point a, t_point b)
 	dy = dy / step;
 	x = a.x;
 	y = a.y;
-	i = 0;
-	while (i < step)
+	while (step)
 	{
 		x = x + dx;
 		y = y + dy;
-		i++;
-		if (y < 0 || x < 0 || y >= TILE_SIZE * MAP_COLS || x >= TILE_SIZE * MAP_ROWS)
+		if (y < 0 || x < 0 || y >= TILE_SIZE * MAP_COLS \
+		|| x >= TILE_SIZE * MAP_ROWS)
 			break ;
-		// if ((x <= p->x + 50 && y <= p->y + 50) && (x >= p->x - 50 && y >= p->y - 50))
-			my_mlx_pixel_put(p, x, y, 0xf80011);
+		my_mlx_pixel_put(p, x, y, 0xf80011);
+		step--;
 	}
 }
 
 t_point	set_point(double x, double y)
 {
 	t_point	p;
+
 	p.x = x;
 	p.y = y;
 	return (p);

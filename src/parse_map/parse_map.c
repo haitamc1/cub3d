@@ -6,12 +6,11 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 20:23:37 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/07 20:24:27 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 12:36:27 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
 
 int	parse_map(t_ply	*p)
 {

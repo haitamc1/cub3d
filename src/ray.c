@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:42:10 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/07 19:45:03 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/08 12:36:38 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	init_rays(t_ply *p, t_ray *ray)
 
 	angle_increment = FOV / NUM_RAYS;
 	angle = p->rotation_angle - (FOV / 2);
-	p_pos = set_point(p->x, p->y); // centrelized the player in 100 by 100 frame
-	// p_pos.x = 100 * (p->x / WIDTH);
-	// p_pos.y = 100 * (p->y / HEIGHT);
+	p_pos = set_point(p->x, p->y);
 	i = 0;
 	while (i < NUM_RAYS)
 	{
