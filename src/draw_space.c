@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_space.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 21:33:00 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/07 21:33:33 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/08 12:52:12 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	draw_wall_strip(t_ply *p, t_ray ray, int x)
 	double	y_top;
 	double	y_bottom;
 	double	wall_height;
-	double	distance_from_top;
 	double	y;
 
 	wall_height = TILE_SIZE / ray.distance * (WIDTH / 2) / tan(FOV / 2);

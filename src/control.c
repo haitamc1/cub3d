@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:48:26 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/07 17:47:19 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 12:53:33 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ int	key(int key, t_ply *p)
 		field_of_view(p, key);
 	else if (key == A || key == S || key == D || key == W)
 		move_player(p, key);
+	return (0);
 }
 
 int	cross(t_ply *p)
 {
 	mlx_destroy_window(p->mlx, p->win);
 	exit(0);
+	return (0);
 }
 
 int	mouse_hook(int key, int x, int y, t_ply *p)
@@ -59,4 +61,5 @@ int	mouse_hook(int key, int x, int y, t_ply *p)
 	(void) x;
 	(void) y;
 	field_of_view(p, key);
+	return (0);
 }

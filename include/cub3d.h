@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/07 21:36:24 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/08 12:52:57 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,10 +240,13 @@ t_bool		is_player_pos(char c);
 bool		filled_texture_check(t_texture *s);
 void		check_player(char **map, int x, int y);
 void		check_file_extension(char *file, char *extension);
+void		reinitialze_img(t_ply *p);
 
 
 void	player_direction(t_ply *p);
+void	move_player(t_ply *p, int key);
 void	draw_map(t_ply *p);
+
 //void	draw_player(t_ply *p);
 
 /* ************************************** TESTS*/

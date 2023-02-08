@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:40:16 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/08 12:37:24 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 12:41:48 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	line_dda(t_ply *p, t_point a, t_point b)
 {
 	double	dx;
 	double	dy;
-	double	x;
-	double	y;
+	t_point	point;
 	double	step;
 
 	dx = b.x - a.x;
@@ -33,16 +32,16 @@ void	line_dda(t_ply *p, t_point a, t_point b)
 		step = fabs(dy);
 	dx = dx / step;
 	dy = dy / step;
-	x = a.x;
-	y = a.y;
+	point.x = a.x;
+	point.y = a.y;
 	while (step)
 	{
-		x = x + dx;
-		y = y + dy;
-		if (y < 0 || x < 0 || y >= TILE_SIZE * MAP_COLS \
-		|| x >= TILE_SIZE * MAP_ROWS)
+		point.x = point.x + dx;
+		point.y = point.y + dy;
+		if (point.y < 0 || point.x < 0 || point.y >= TILE_SIZE * MAP_COLS \
+		|| point.x >= TILE_SIZE * MAP_ROWS)
 			break ;
-		my_mlx_pixel_put(p, x, y, 0xf80011);
+		my_mlx_pixel_put(p, point.x, point.y, 0xf80011);
 		step--;
 	}
 }

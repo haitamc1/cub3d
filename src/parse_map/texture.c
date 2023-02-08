@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:15:33 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/08 12:27:10 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 12:50:30 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	load_textures(t_ply *p)
 
 char	*get_txtr(t_ply *p, char *file)
 {
-	int		len;
 	int		width;
 	int		height;
 	char	*addr;

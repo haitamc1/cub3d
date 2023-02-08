@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:18:56 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/07 19:19:50 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 12:51:56 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_point	get_horizontal_wall_hit_point(t_ply *p, t_point a, double angle)
 	double	xstep;
 	double	ystep;
 	t_point	first_intersection;
-	double	ycheck;
 
 	ystep = TILE_SIZE;
 	first_intersection.y = floor(a.y / TILE_SIZE) * (TILE_SIZE);
@@ -61,7 +60,6 @@ t_point	get_vertical_wall_hit_point(t_ply *p, t_point a, double angle)
 	double	xstep;
 	double	ystep;
 	t_point	first_intersection;
-	double	xcheck;
 
 	xstep = TILE_SIZE;
 	first_intersection.x = floor(a.x / TILE_SIZE) * (TILE_SIZE);
