@@ -14,12 +14,14 @@ M_SRC_DRAW_DIR = src/draw/
 
 FALGS = -Wall -Wextra -fsanitize=address -g#-Werror #
 
-M_SRC_PARSE_NAME = utils utils1 utils2 loading_data parse_resource parse_map #ft_split ft_atoi  ft_isdigit
+M_SRC_PARSE_NAME = resource parse_map player map map_utils \
+					parse_utils texture white_space color \
 
 M_SRC_DRAW_NAME = 
 
-M_SRC_PRIME_NAME = control init_cub3d  main draw line ray  wall move intersection debug minimap minimap_utils \
-					draw_utils draw_space
+M_SRC_PRIME_NAME = control init_cub3d  main draw line ray \
+					wall move intersection debug minimap \
+					minimap_utils draw_utils draw_space print
 
 BUILD_DIR = build/
 
