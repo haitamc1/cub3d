@@ -6,13 +6,13 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:15:33 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/08 12:50:30 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 23:19:44 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-bool	filled_texture_check(t_texture *s)
+t_bool	filled_texture_check(t_texture *s)
 {
 	if (s->ea_file && s->we_file && s->no_file && s->so_file \
 		&& s->floor_clr != -1 && s->ceiling_clr != -1)

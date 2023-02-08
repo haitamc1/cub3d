@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:42:10 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/08 12:36:38 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 23:05:19 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	init_rays(t_ply *p, t_ray *ray)
 	double	angle_increment;
 	t_point	p_pos;
 
-	angle_increment = FOV / NUM_RAYS;
-	angle = p->rotation_angle - (FOV / 2);
+	angle_increment = p->fov / NUM_RAYS;
+	angle = p->rotation_angle - (p->fov / 2);
 	p_pos = set_point(p->x, p->y);
 	i = 0;
 	while (i < NUM_RAYS)

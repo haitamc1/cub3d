@@ -12,7 +12,7 @@ M_SRC_PARSE_DIR = src/parse_map/
 
 M_SRC_DRAW_DIR = src/draw/
 
-FALGS = -Wall -Wextra -fsanitize=address -g#-Werror #
+FALGS = -Wall -Wextra -Werror #-fsanitize=address -g#-Werror #
 
 M_SRC_PARSE_NAME = resource parse_map player map map_utils \
 					parse_utils texture white_space color \
@@ -76,6 +76,7 @@ clean :
 
 fclean : clean
 	@make fclean -C $(LIB_FT)
+	@make fclean -C $(LIB_GNL)
 	rm -rf $(NAME)
 
 re : fclean all

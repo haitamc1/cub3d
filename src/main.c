@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:29:11 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/07 19:29:12 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 23:10:30 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int ac, char **av)
 		init_textures(&p.txt);
 		check_map(&p, av[1]);
 		load_textures(&p);
-		print_map(p.map);
 		draw_map(&p);
 		mlx_put_image_to_window(p.mlx, p.win, p.img, 0, 0);
 		mlx_hook(p.win, 17, 0L, &cross, &p);

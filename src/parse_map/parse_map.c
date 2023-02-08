@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 20:23:37 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/08 12:36:27 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 23:12:30 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ void	parse_line(t_ply *p, int x)
 void	check_space(char **map, int x, int y)
 {
 	if (y > 0 && (map[x][y - 1] != ' ' && map[x][y - 1] != '1'))
-		(printf("SPACE ERR: 1\n"), exit_msg(&map[x][y]));
+		exit_msg("SPACE ERR: 1\n");
 	if ((map[x][y + 1] != ' ' && map[x][y + 1] != '1'))
-		(printf("SPACE ERR: 2\n"), exit_msg(&map[x][y]));
+		exit_msg("SPACE ERR: 2\n");
 	if (ft_strlen(map[x - 1]) > y && (map[x - 1][y] != ' ' \
 		&& map[x - 1][y] != '1'))
-		(printf("SPACE ERR: 3\n"), exit_msg(&map[x][y]));
+		exit_msg("SPACE ERR: 3\n");
 	if (ft_strlen(map[x + 1]) > y && (map[x + 1][y] != ' ' \
 		&& map[x + 1][y] != '1'))
-		(printf("SPACE ERR: 4\n"), exit_msg(&map[x][y]));
+		exit_msg("SPACE ERR: 4\n");
 }
 
 void	check_zero(char **map, int x, int y)

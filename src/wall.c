@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:43:42 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/08 21:40:44 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 22:52:12 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_bool	has_wall(t_ply *p, double x, double y, t_bool corner_check)
 	map = p->map;
 	xcheck = floor(x / TILE_SIZE);
 	ycheck = floor(y / TILE_SIZE);
-	if (xcheck < 0 || ycheck < 0 || ycheck > p->y_map || xcheck > p->x_map)
+	if (xcheck < 0 || ycheck < 0 || ycheck >= p->y_map || xcheck >= p->x_map)
 		return (TRUE);
 	if (map[ycheck][xcheck] == '1')
 		return (TRUE);

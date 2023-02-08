@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:24:41 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/08 12:25:11 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 23:19:59 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*fill_space(char *line, int size)
 	return (buff);
 }
 
-bool	is_space(char c)
+t_bool	is_space(char c)
 {
 	if (c == '\t' || c == '\n' || c == ' ' || c == '\v'
 		|| c == '\f' || c == '\r')
@@ -41,7 +41,7 @@ bool	is_space(char c)
 	return (0);
 }
 
-bool	just_space(char *s)
+t_bool	just_space(char *s)
 {
 	int	i;
 

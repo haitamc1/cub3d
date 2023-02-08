@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 21:33:00 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/08 12:52:12 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 23:08:38 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	draw_wall_strip(t_ply *p, t_ray ray, int x)
 	double	wall_height;
 	double	y;
 
-	wall_height = TILE_SIZE / ray.distance * (WIDTH / 2) / tan(FOV / 2);
-	y_top = (WIDTH / 2) - (wall_height / 2);
+	wall_height = TILE_SIZE / ray.distance * (p->width / 2) / tan(p->fov / 2);
+	y_top = (p->width / 2) - (wall_height / 2);
 	if (y_top < 0)
 		y_top = 0;
-	y_bottom = (WIDTH / 2) + (wall_height / 2);
-	if (y_bottom >= HEIGHT)
-		y_bottom = HEIGHT - 1;
+	y_bottom = (p->width / 2) + (wall_height / 2);
+	if (y_bottom >= p->height)
+		y_bottom = p->height - 1;
 	draw_ceiling(p, x, y_top);
 	y = y_top;
 	while (y < y_bottom)
@@ -62,7 +62,7 @@ void	draw_floor(t_ply *p, int x, int y_start)
 	int	j;
 
 	j = y_start;
-	while (j < HEIGHT)
+	while (j < p->height)
 	{
 		my_mlx_pixel_put(p, x, j, p->txt.floor_clr);
 		j++;

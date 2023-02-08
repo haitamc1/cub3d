@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:23:39 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/07 21:33:39 by hchahid          ###   ########.fr       */
+/*   Updated: 2023/02/08 23:07:05 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ void	draw_pxl(t_ply *p, t_ray *ray, int x, double y)
 	double	wall_height;
 	int		y_color;
 
-	wall_height = (TILE_SIZE / ray->distance) * (WIDTH / 2) / tan(FOV / 2);
-	distance_from_top = y + wall_height / 2 - WIDTH / 2;
+	wall_height = (TILE_SIZE / ray->distance) * (p->width / 2) \
+	/ tan(p->fov / 2);
+	distance_from_top = y + wall_height / 2 - p->width / 2;
 	y_color = distance_from_top * TILE_SIZE / wall_height;
 	if (ray->hit_type == HORZ && is_facing_up(ray->angle))
 		color = get_mlx_pixel_color(p, p->txt.no_txtr, ray->x_txt, y_color);
