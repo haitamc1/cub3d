@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:13:53 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/08 12:26:08 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 15:55:35 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	get_map_xy(t_ply *p)
 		y++;
 	}
 	p->x_map = x_max;
-	p->y_map = y - 1;
+	p->y_map = y;
 }
 
 void	get_full_map(t_ply *p)

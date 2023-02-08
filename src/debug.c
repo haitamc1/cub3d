@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hchahid <hchahid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:24:54 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/07 21:03:47 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 21:17:29 by hchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ void	print_map(char **map)
 	}
 }
 
-void	print_player_info(t_ply *p)
-{
-	printf("player y[%d]x[%d]\n", (int)(p->y / \
-	TILE_SIZE), (int)(p->x / TILE_SIZE));
-	printf("angle [%.2f]\n", p->rotation_angle);
-	printf("map[%d][%d]\n", p->y_map, p->x_map);
-}
+// void	print_player_info(t_ply *p)
+// {
+// 	printf("player y[%d]x[%d]\n", (int)(p->y / 
+// 	TILE_SIZE), (int)(p->x / TILE_SIZE));
+// 	printf("in map x = %f| y = %f\n", p->x, p->y);
+// 	printf("angle [%.2f]\n", (p->rotation_angle * 180)/ PI);
+// 	printf("map[%d][%d]\n", p->y_map, p->x_map);
+// }
