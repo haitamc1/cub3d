@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:48:26 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/08 12:53:33 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 17:36:04 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	key(int key, t_ply *p)
 		field_of_view(p, key);
 	else if (key == A || key == S || key == D || key == W)
 		move_player(p, key);
+	else if (key == 48)
+		print_player_info(p);
 	return (0);
 }
 

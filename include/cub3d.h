@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/08 12:52:57 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 21:40:05 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,7 @@ void	load_textures(t_ply *p);
 void	set_player_pos(t_ply *p, int x, int y);
 void	set_player_angle(t_ply *p, char c);
 void	draw_pxl(t_ply *p, t_ray *ray, int x, double y);
-t_bool	wall_corner_check(t_ply *p, int ycheck, int xcheck);
+t_bool	wall_corner_check(t_ply *p, double ycheck, double xcheck);
 void	move_up(t_ply *p);
 void	move_down(t_ply *p);
 void	move_right(t_ply *p);
