@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:08 by hchahid           #+#    #+#             */
-/*   Updated: 2023/02/08 23:20:34 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 23:33:22 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,5 +246,7 @@ t_point		get_vert_intersection_point(t_ply *p, t_point begin, t_point step, \
 
 void		print_map(char **map);
 void		print_player_info(t_ply *p);
+void		draw_rect_2d(t_ply *p, t_point point, int len, int color);
+void		draw_map_2d(t_ply *p);
 
 #endif // CUB3D_H

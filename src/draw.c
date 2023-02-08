@@ -6,7 +6,7 @@
 /*   By: arouzen <arouzen@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:23:39 by arouzen           #+#    #+#             */
-/*   Updated: 2023/02/08 23:07:05 by arouzen          ###   ########.fr       */
+/*   Updated: 2023/02/08 23:30:48 by arouzen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,51 @@ void	draw_rect(t_ply *p, t_point origin, t_point limit, int color)
 		while (i < limit.x - 1)
 		{
 			my_mlx_pixel_put(p, origin.x + i, origin.y + j, color);
+			i++;
+		}
+		j++;
+	}
+}
+
+void	draw_map_2d(t_ply *p)
+{
+	t_ray	ray[NUM_RAYS];
+	int		x;
+	int		y;
+	int		map_x;
+	int		map_y;
+
+	init_rays(p, ray);
+	map_x = MAP_ROWS * TILE_SIZE;
+	map_y = MAP_COLS * TILE_SIZE;
+	y = 0;
+	while (y < map_y)
+	{
+		x = 0;
+		while (x < map_x)
+		{
+			if (p->map[y / TILE_SIZE][x / TILE_SIZE] == '1')
+				draw_rect_2d(p, set_point(x, y), TILE_SIZE, 0xFA4FFF);
+			x += TILE_SIZE;
+		}
+		y += TILE_SIZE;
+	}
+	render_ray_all(p);
+	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
+}
+
+void	draw_rect_2d(t_ply *p, t_point point, int len, int color)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j < len)
+	{
+		i = 0;
+		while (i < len)
+		{
+			my_mlx_pixel_put(p, point.x + i, point.y + j, color);
 			i++;
 		}
 		j++;
